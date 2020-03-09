@@ -1,0 +1,11 @@
+C:\Users\qtkol\RiderProjects\BranchMath\BranchMath\obj\Debug\netcoreapp3.1\BranchMath.csprojAssemblyReference.cache
+C:\Users\qtkol\RiderProjects\BranchMath\BranchMath\obj\Debug\netcoreapp3.1\BranchMath.AssemblyInfoInputs.cache
+C:\Users\qtkol\RiderProjects\BranchMath\BranchMath\obj\Debug\netcoreapp3.1\BranchMath.AssemblyInfo.cs
+C:\Users\qtkol\RiderProjects\BranchMath\BranchMath\bin\Debug\netcoreapp3.1\BranchMath.exe
+C:\Users\qtkol\RiderProjects\BranchMath\BranchMath\bin\Debug\netcoreapp3.1\BranchMath.deps.json
+C:\Users\qtkol\RiderProjects\BranchMath\BranchMath\bin\Debug\netcoreapp3.1\BranchMath.runtimeconfig.json
+C:\Users\qtkol\RiderProjects\BranchMath\BranchMath\bin\Debug\netcoreapp3.1\BranchMath.runtimeconfig.dev.json
+C:\Users\qtkol\RiderProjects\BranchMath\BranchMath\bin\Debug\netcoreapp3.1\BranchMath.dll
+C:\Users\qtkol\RiderProjects\BranchMath\BranchMath\bin\Debug\netcoreapp3.1\BranchMath.pdb
+C:\Users\qtkol\RiderProjects\BranchMath\BranchMath\obj\Debug\netcoreapp3.1\BranchMath.dll
+C:\Users\qtkol\RiderProjects\BranchMath\BranchMath\obj\Debug\netcoreapp3.1\BranchMath.pdb

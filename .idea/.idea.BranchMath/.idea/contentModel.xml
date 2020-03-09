@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="C:\Users\qtkol\.Rider2019.3\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\qtkol\.Rider2019.3\system\resharper-host\local\Transient\ReSharperHost\v193\SolutionCaches\_BranchMath.-422234626.00" t="ExcludeRecursive" />
+    <e p="C:\Users\qtkol\RiderProjects\BranchMath" t="IncludeFlat">
+      <e p="BranchMath" t="IncludeRecursive">
+        <e p="Algebra" t="Include">
+          <e p="AlgebraicElement.cs" t="Include" />
+          <e p="AlgebraicStructure.cs" t="Include" />
+          <e p="Groups" t="Include">
+            <e p="CartesianProductGroup.cs" t="Include" />
+            <e p="CyclicGroup.cs" t="Include" />
+            <e p="DihedralGroup.cs" t="Include" />
+            <e p="Group.cs" t="Include" />
+          </e>
+          <e p="InvalidElementException.cs" t="Include" />
+          <e p="InvalidStructureException.cs" t="Include" />
+        </e>
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="BranchMath.csproj" t="IncludeRecursive" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netcoreapp3.1" t="Include">
+              <e p="BranchMath.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="Program.cs" t="Include" />
+        <e p="Tree" t="Include">
+          <e p="DerivedSet.cs" t="Include" />
+          <e p="ExplicitSet.cs" t="Include" />
+          <e p="InvalidOperationException.cs" t="Include" />
+          <e p="Node.cs" t="Include" />
+          <e p="Set.cs" t="Include" />
+        </e>
+      </e>
+      <e p="BranchMath.sln" t="IncludeFlat" />
+      <e p="packages" t="ExcludeRecursive" />
+    </e>
+  </component>
+</project>
