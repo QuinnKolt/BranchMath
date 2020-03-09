@@ -3,5 +3,7 @@
         public Node getCardinality() {
             return null;
         }
+
+        public bool isElement(T obj);
     }
 }

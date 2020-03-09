@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using BranchMath.Tree;
 
 namespace BranchMath.Algebra.Groups {
     /// <summary>
@@ -13,9 +14,10 @@ namespace BranchMath.Algebra.Groups {
         public DihedralGroup(int order) {
             if (order % 2 != 0 || order <= 0) throw new InvalidGroupException("No Dihedral group of odd order");
 
+            Elements = new ExplicitSet<AlgebraicElement<int[]>>();
             Parallel.For(0, order / 2, i => {
-                Elements.Add(new AlgebraicElement<int[]>(new[] {0, i}));
-                Elements.Add(new AlgebraicElement<int[]>(new[] {1, i}));
+                ((ExplicitSet<AlgebraicElement<int[]>>) Elements).Elements.Add(new AlgebraicElement<int[]>(new[] {0, i}));
+                ((ExplicitSet<AlgebraicElement<int[]>>) Elements).Elements.Add(new AlgebraicElement<int[]>(new[] {1, i}));
             });
         }
 

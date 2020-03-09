@@ -25,44 +25,6 @@ namespace BranchMath.Algebra.Groups {
         private Group<object>[] Groups { get; }
 
         /// <summary>
-        ///     Recursively collects all of the elements in the cartesian product
-        /// </summary>
-        /// <param name="groups">The groups to compute the cartesian product of</param>
-        /// <returns>A bag of all of the elements in the cartesian product</returns>
-        private static ConcurrentBag<AlgebraicElement<object[]>> collectElements(Group<object>[] groups) {
-            var elements = new ConcurrentBag<AlgebraicElement<object[]>>();
-            // If there is only one group, convert the identifiers to singleton arrays of elements
-            // containing their identifiers
-            if (groups.Length == 1) {
-                Parallel.ForEach(groups[0].Elements, el =>
-                    elements.Add(new AlgebraicElement<object[]>(new[] {el.Identifier}))
-                );
-            }
-
-            else {
-                // Recursively collect all of the elements in the cartesian product group of all groups except the first
-                var otherGroups = new Group<object>[groups.Length - 1];
-                Array.Copy(groups, 0, otherGroups, 1, groups.Length);
-                var otherGroupElems = collectElements(otherGroups);
-
-                // Find all tuples containing this element as the first entry combined with all other tuples obtained
-                // recursively
-                Parallel.ForEach(groups[0].Elements, elem =>
-                    Parallel.ForEach(otherGroupElems, el => {
-                        var tup = new object[groups.Length];
-                        tup[0] = elem.Identifier;
-
-                        Parallel.For(1, groups.Length, i => { tup[i] = el.Identifier[i - 1]; });
-                        var comb = new AlgebraicElement<object[]>(tup);
-                        elements.Add(comb);
-                    })
-                );
-            }
-
-            return elements;
-        }
-
-        /// <summary>
         ///     Find the product of two elements in the group by multiplying the individual pairs of elements in their tuples.
         /// </summary>
         /// <param name="g">The first element to multiply.</param>
