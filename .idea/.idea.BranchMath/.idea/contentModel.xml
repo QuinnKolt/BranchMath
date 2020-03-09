@@ -30,9 +30,14 @@
         <e p="Tree" t="Include">
           <e p="DerivedSet.cs" t="Include" />
           <e p="ExplicitSet.cs" t="Include" />
+          <e p="FunctionNode.cs" t="Include" />
           <e p="InvalidOperationException.cs" t="Include" />
           <e p="Node.cs" t="Include" />
+          <e p="NumberNode.cs" t="Include" />
+          <e p="Ordinal.cs" t="Include" />
+          <e p="RealNumber.cs" t="Include" />
           <e p="Set.cs" t="Include" />
+          <e p="Variable.cs" t="Include" />
         </e>
       </e>
       <e p="BranchMath.sln" t="IncludeFlat" />

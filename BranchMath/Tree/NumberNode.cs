@@ -1,4 +1,5 @@
 ﻿namespace BranchMath.Tree {
-    public class NumberNode {
+    public interface NumberNode : Node {
+        public bool is_finite();
     }
 }

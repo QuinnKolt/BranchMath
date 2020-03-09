@@ -25,8 +25,9 @@ namespace BranchMath.Tree {
         ///     The HashSet holding the elements of the mathematical set.
         /// </summary>
         public ImmutableHashSet<I> Elements { get; protected set; }
-        
-        public 
 
+        public bool isElement(I obj) {
+            return Elements.Contains(obj);
+        }
     }
 }
