@@ -69,5 +69,11 @@ namespace BranchMath.Numbers {
             }
             throw new ArithmeticException("Indeterminant form");
         }
+
+        public override string ToString() {
+            if (is_finite())
+                return int_val.ToString();
+            return "Aleph " + card_val;
+        }
     }
 }
