@@ -1,10 +1,14 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Collections.Immutable;
+using System.Numerics;
+using System.Threading.Tasks;
+using BranchMath.Tree;
 
 namespace BranchMath.Algebra.Groups {
     /// <summary>
     ///     An Implementation of the Cyclic group
     /// </summary>
-    public class CyclicGroup : Group<int> {
+    public class CyclicGroup : Group<BigInteger> {
         /// <summary>
         ///     Constructs a cyclic group
         /// </summary>
@@ -12,8 +16,10 @@ namespace BranchMath.Algebra.Groups {
         /// <exception cref="InvalidGroupException">If the order of the cyclic group is not positive</exception>
         public CyclicGroup(int order) {
             if (order <= 0) throw new InvalidGroupException("No cyclic group of negative order");
-
-            Parallel.For(0, order, i => { Elements.Add(new AlgebraicElement<int>(i)); });
+            Elements = new ExplicitSet<AlgebraicElement<BigInteger>>();
+            for (BigInteger i = 0; i < order / 2; ++i) {
+                ((ExplicitSet<AlgebraicElement<BigInteger>>) Elements).Elements.Add(new AlgebraicElement<BigInteger>(i));
+            }
         }
 
         /// <summary>
@@ -22,9 +28,10 @@ namespace BranchMath.Algebra.Groups {
         /// <param name="g">The first element to multiply.</param>
         /// <param name="h">The second element to multiply.</param>
         /// <returns>The element gh.</returns>
-        public override AlgebraicElement<int> MultiplyElements(AlgebraicElement<int> g, AlgebraicElement<int> h) {
+        public override AlgebraicElement<BigInteger> MultiplyElements(AlgebraicElement<BigInteger> g, AlgebraicElement<BigInteger> h) {
             try {
-                return new AlgebraicElement<int>((g.Identifier + h.Identifier) % order());
+                var ord = order().evaluate().Value;
+                return new AlgebraicElement<BigInteger>((g.Identifier + h.Identifier) % ord);
             }
             catch {
                 throw new InvalidElementException("Element not in group");
@@ -36,9 +43,10 @@ namespace BranchMath.Algebra.Groups {
         /// </summary>
         /// <param name="g">The element to find the inverse of</param>
         /// <returns>The inverse of the given element</returns>
-        public override AlgebraicElement<int> GetInverse(AlgebraicElement<int> g) {
+        public override AlgebraicElement<BigInteger> GetInverse(AlgebraicElement<BigInteger> g) {
             try {
-                return new AlgebraicElement<int>((order() - g.Identifier) % order());
+                var ord = order().evaluate().Value;
+                return new AlgebraicElement<BigInteger>((ord - g.Identifier) % ord);
             }
             catch {
                 throw new InvalidElementException("Element not in group");
@@ -51,7 +59,7 @@ namespace BranchMath.Algebra.Groups {
         /// </summary>
         /// <param name="g">The element to display</param>
         /// <returns>The LaTeX representation of g</returns>
-        public override string DisplayElement(AlgebraicElement<int> g) {
+        public override string DisplayElement(AlgebraicElement<BigInteger> g) {
             var iden = g.Identifier;
             if (iden == 0) return "e";
 

@@ -9,7 +9,6 @@
           <e p="AlgebraicElement.cs" t="Include" />
           <e p="AlgebraicStructure.cs" t="Include" />
           <e p="Groups" t="Include">
-            <e p="CartesianProductGroup.cs" t="Include" />
             <e p="CyclicGroup.cs" t="Include" />
             <e p="DihedralGroup.cs" t="Include" />
             <e p="Group.cs" t="Include" />
@@ -19,6 +18,15 @@
         </e>
         <e p="bin" t="ExcludeRecursive" />
         <e p="BranchMath.csproj" t="IncludeRecursive" />
+        <e p="Numbers" t="Include">
+          <e p="Cardinal.cs" t="Include" />
+          <e p="ComplexNumber.cs" t="Include" />
+          <e p="Integer.cs" t="Include" />
+          <e p="Number.cs" t="Include" />
+          <e p="Ordinal.cs" t="Include" />
+          <e p="Rational.cs" t="Include" />
+          <e p="RealNumber.cs" t="Include" />
+        </e>
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
             <e p="netcoreapp3.1" t="Include">
@@ -28,15 +36,15 @@
         </e>
         <e p="Program.cs" t="Include" />
         <e p="Tree" t="Include">
+          <e p="CartesianProduct.cs" t="Include" />
           <e p="DerivedSet.cs" t="Include" />
           <e p="ExplicitSet.cs" t="Include" />
           <e p="FunctionNode.cs" t="Include" />
           <e p="InvalidOperationException.cs" t="Include" />
           <e p="Node.cs" t="Include" />
-          <e p="NumberNode.cs" t="Include" />
-          <e p="Ordinal.cs" t="Include" />
-          <e p="RealNumber.cs" t="Include" />
           <e p="Set.cs" t="Include" />
+          <e p="Tuple.cs" t="Include" />
+          <e p="ValueType.cs" t="Include" />
           <e p="Variable.cs" t="Include" />
         </e>
       </e>

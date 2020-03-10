@@ -7,7 +7,7 @@ namespace BranchMath.Algebra {
     ///     elements. Note that the same element can be used in several algebraic structures.
     /// </summary>
     /// <typeparam name="I">The type of the identifier</typeparam>
-    public class AlgebraicElement<I> : Node {
+    public class AlgebraicElement<I> : ValueType {
         /// <summary>
         ///     Create a new Algebraic Element
         /// </summary>

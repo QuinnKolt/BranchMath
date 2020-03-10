@@ -7,6 +7,7 @@
 
     <ItemGroup>
       <Compile Remove="Algebra\VariableAlgebraicElement.cs" />
+      <Compile Remove="Algebra\Groups\CartesianProductGroup.cs" />
     </ItemGroup>
 
 </Project>

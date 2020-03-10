@@ -1,5 +1,5 @@
-﻿namespace BranchMath.Tree {
-    public class RealNumber : NumberNode {
+﻿namespace BranchMath.Numbers {
+    public class ComplexNumber : Number {
         public bool is_finite() {
             return true;
         }

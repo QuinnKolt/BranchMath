@@ -1,4 +1,6 @@
-﻿using System.Collections.Immutable;
+﻿using System.Collections.Generic;
+using System.Collections.Immutable;
+using BranchMath.Numbers;
 
 namespace BranchMath.Tree {
     /// <summary>
@@ -7,27 +9,32 @@ namespace BranchMath.Tree {
     /// <typeparam name="I">The type of objects contained within the set</typeparam>
     public class ExplicitSet<I> : Set<I> where I : Node {
         /// <summary>
+        ///     The HashSet holding the elements of the mathematical set.
+        /// </summary>
+        public HashSet<I> Elements { get; protected set; }
+        
+        /// <summary>
         ///     Construct an empty set, which can have elements added
         /// </summary>
         public ExplicitSet() {
-            Elements = ImmutableHashSet<I>.Empty;
+            Elements = new HashSet<I>();
         }
 
         /// <summary>
         ///     Construct a mathematical set given a HashSet
         /// </summary>
         /// <param name="elements">The HashSet</param>
-        public ExplicitSet(ImmutableHashSet<I> elements) {
+        public ExplicitSet(HashSet<I> elements) {
             Elements = elements;
         }
 
-        /// <summary>
-        ///     The HashSet holding the elements of the mathematical set.
-        /// </summary>
-        public ImmutableHashSet<I> Elements { get; protected set; }
 
         public bool isElement(I obj) {
             return Elements.Contains(obj);
+        }
+
+        public Cardinal getCardinality() {
+            return new Cardinal(Elements.Count,0);
         }
     }
 }
