@@ -41,8 +41,8 @@ namespace BranchMath.Algebra {
         /// <param name="obj">The object to check</param>
         /// <returns>True if the two elements can be simplified into one another</returns>
         public override bool Equals(object obj) {
-            if (obj != null && obj is AlgebraicElement<I>)
-                return (obj as AlgebraicElement<I>).Identifier.Equals(Identifier);
+            if (obj != null && obj is AlgebraicElement<I> element)
+                return element.Identifier.Equals(Identifier);
 
             return false;
         }

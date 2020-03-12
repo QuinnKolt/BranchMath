@@ -16,7 +16,7 @@ namespace BranchMath {
 
             var sr4 = D12.MultiplyElements(sr, r3);
             var ee = D12.MultiplyElements(sr, sr);
-            Console.WriteLine(D12.GetCayleyTable());
+            Console.WriteLine(D16.GetCayleyTable());
         }
     }
 }

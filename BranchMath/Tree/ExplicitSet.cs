@@ -7,7 +7,7 @@ namespace BranchMath.Tree {
     ///     Represents a mathematical set
     /// </summary>
     /// <typeparam name="I">The type of objects contained within the set</typeparam>
-    public class ExplicitSet<I> : Set<I> where I : Node {
+    public class ExplicitSet<I> : Set<I> where I : ValueType {
         /// <summary>
         ///     The HashSet holding the elements of the mathematical set.
         /// </summary>

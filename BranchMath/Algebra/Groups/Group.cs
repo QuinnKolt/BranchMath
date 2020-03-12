@@ -30,22 +30,21 @@ namespace BranchMath.Algebra.Groups {
 
 
         public Table<string, string, string> GetCayleyTable() {
-            if (Elements is ExplicitSet<AlgebraicElement<I>>) {
-                AlgebraicElement<I>[] elements = ((ExplicitSet<AlgebraicElement<I>>) Elements).Elements.ToArray();
-                string[] xlabels = new string[elements.Length];
-                string[] ylabels = new string[elements.Length];
-                string[,] products = new string[elements.Length,elements.Length];
-                for (int i = 0; i < elements.Length; ++i) {
-                    xlabels[i] = DisplayElement(elements[i]);
-                    ylabels[i] = DisplayElement(elements[i]);
-                    for (int j = 0; j < elements.Length; ++j) {
-                        products[i,j] = DisplayElement(MultiplyElements(elements[i], elements[j]));
-                    } 
-                }
-                return new Table<string, string, string>(products, xlabels, ylabels);
+            if (!(Elements is ExplicitSet<AlgebraicElement<I>>))
+                throw new InfiniteSizeException("Cardinality is infinite");
+            var elements = ((ExplicitSet<AlgebraicElement<I>>) Elements).Elements.ToArray();
+            var xlabels = new string[elements.Length];
+            var ylabels = new string[elements.Length];
+            var products = new string[elements.Length,elements.Length];
+            for (var i = 0; i < elements.Length; ++i) {
+                xlabels[i] = DisplayElement(elements[i]);
+                ylabels[i] = DisplayElement(elements[i]);
+                for (var j = 0; j < elements.Length; ++j) {
+                    products[i,j] = DisplayElement(MultiplyElements(elements[i], elements[j]));
+                } 
             }
+            return new Table<string, string, string>(products, xlabels, ylabels);
 
-            throw new InfiniteSizeException("Cardinality is infinite");
         }
     }
 }

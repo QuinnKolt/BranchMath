@@ -1,5 +1,5 @@
 ﻿namespace BranchMath.Tree {
-    public class Variable<I> : Node where I : ValueType {
+    public class Variable<I> : Node<I> where I : ValueType {
         private readonly string rep;
         public I value { get; private set; } 
         

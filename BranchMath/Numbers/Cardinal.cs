@@ -12,11 +12,7 @@ namespace BranchMath.Numbers {
         }
         
         public BigInteger? evaluate() {
-            if (is_finite()) {
-                return int_val;
-            }
-
-            return null;
+            return is_finite() ? int_val : null;
         }
 
         public bool is_finite() {
@@ -74,6 +70,10 @@ namespace BranchMath.Numbers {
             if (is_finite())
                 return int_val.ToString();
             return "Aleph " + card_val;
+        }
+
+        public Cardinal powerset() {
+            return is_finite() ? new Cardinal(2 ^ int_val.Value, 0) : new Cardinal(0, card_val + 1);
         }
     }
 }

@@ -29,17 +29,19 @@ namespace BranchMath.Display {
                 }
             }
 
-            var str = center("", max[ylabels.Length]  + 2) + " |";
+            var str = center("", max[ylabels.Length]  + 2) + " ||";
 
             for (int j = 0; j < ylabels.Length; ++j) {
                 str += center(ylabels[j].ToString(), max[j] + 2);
                 str += "|";
             }
+
+            str += "\n";
             
             for (int i = 0; i < xlabels.Length; ++i) {
                 str += "\n|";
                 str += center(xlabels[i].ToString(), max[ylabels.Length] + 2);
-                str += "|";
+                str += "||";
                 for (int j = 0; j < ylabels.Length; ++j) {
                     str += center(entries[i, j].ToString(), max[j] + 2);
                     str += "|";

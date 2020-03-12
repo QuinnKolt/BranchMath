@@ -5,19 +5,19 @@ using BranchMath.Algebra;
 using BranchMath.Algebra.Groups;
 
 namespace BranchMath.Tree {
-    public class CartesianProduct<I> : FunctionNode<Set<Tuple<I>>> where I : ValueType {
+    public class CartesianProduct<I> : FunctionNode<Set<Tuple>> where I : ValueType {
         
         
-        public Node simplify() {
+        public Node<Set<Tuple>> simplify() {
             return this;
         }
 
-        public FunctionNode<Set<Tuple<I>>> deep_copy() {
+        public Node<Set<Tuple>> deep_copy() {
             return this;
         }
 
 
-        public Set<Tuple<I>> evaluate() {
+        public Set<Tuple> evaluate() {
             return null;
         }
         

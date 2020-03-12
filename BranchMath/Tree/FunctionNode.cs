@@ -1,10 +1,8 @@
 ﻿using System.Collections.Generic;
 
 namespace BranchMath.Tree {
-    public interface FunctionNode<out V> : Node where V : ValueType {
-        public Node simplify();
-        public FunctionNode<V> deep_copy();
-
-        public V evaluate();
+    public interface FunctionNode<C> : Node<C> where C : ValueType{
+        public Node<C> simplify();
+        public C evaluate();
     }
 }

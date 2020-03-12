@@ -8,7 +8,7 @@ namespace BranchMath.Algebra.Groups {
     /// <summary>
     ///     An Implementation of the Cyclic group
     /// </summary>
-    public class CyclicGroup : Group<BigInteger> {
+    public class CyclicGroup : FiniteGroup<BigInteger> {
         /// <summary>
         ///     Constructs a cyclic group
         /// </summary>

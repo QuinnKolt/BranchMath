@@ -6,7 +6,7 @@ namespace BranchMath.Algebra.Groups {
     /// <summary>
     ///     An Implementation of the Dihedral group
     /// </summary>
-    public class DihedralGroup : Group<BigInteger[]> {
+    public class DihedralGroup : FiniteGroup<BigInteger[]> {
         /// <summary>
         ///     Create a new Dihedral group
         /// </summary>
