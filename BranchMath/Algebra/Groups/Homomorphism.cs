@@ -1,9 +1,14 @@
-﻿using BranchMath.Tree;
+﻿using BranchMath.Value;
 
 namespace BranchMath.Algebra.Groups {
-    public interface Homomorphism<I, J> : Function<AlgebraicElement<I>> {
-        public Group<I> GetKernel();
+    /// <summary>
+    ///     Represents a group homomorphism between two groups
+    /// </summary>
+    /// <typeparam name="I">The identifier type of the domain group</typeparam>
+    /// <typeparam name="J">The identifier type of the codomain group</typeparam>
+    public abstract class Homomorphism<I, J> : Mapping<AlgebraicElement<I>> {
+        public abstract Group<I> GetKernel();
 
-        public AlgebraicElement<I> evaluate(AlgebraicElement<J> el);
+        public abstract AlgebraicElement<I> evaluate(AlgebraicElement<J> el);
     }
 }

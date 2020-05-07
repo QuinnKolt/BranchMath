@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using BranchMath.Tree;
+﻿using BranchMath.Value;
 
 namespace BranchMath.Algebra {
     /// <summary>
@@ -11,9 +10,11 @@ namespace BranchMath.Algebra {
         /// <summary>
         ///     Create a new Algebraic Element
         /// </summary>
-        /// <param name="identifier"></param>
-        public AlgebraicElement(I identifier) {
+        /// <param name="identifier">Identifier that allows manipulation of the element</param>
+        /// <param name="structure">The structure to which this element belongs to</param>
+        public AlgebraicElement(I identifier, AlgebraicStructure<I> structure) {
             Identifier = identifier;
+            this.structure = structure;
         }
 
         /// <summary>
@@ -21,18 +22,7 @@ namespace BranchMath.Algebra {
         /// </summary>
         public I Identifier { get; }
 
-        /// <summary>
-        ///     Creates a tuple of elements from an array of elements
-        /// </summary>
-        /// <param name="elems">List of elements</param>
-        /// <returns>tuple of elements</returns>
-        public static AlgebraicElement<object[]> ToTuple(AlgebraicElement<object>[] elems) {
-            var identifiers = new object[elems.Length];
-
-            Parallel.For(0, elems.Length, i => identifiers[i] = (I) elems[i].Identifier);
-
-            return new AlgebraicElement<object[]>(identifiers);
-        }
+        public AlgebraicStructure<I> structure { protected get; set; }
 
         /// <summary>
         ///     Checks if two elements are equal. Note this will only return true if the operation trees have enough
@@ -47,8 +37,25 @@ namespace BranchMath.Algebra {
             return false;
         }
 
+        /// <summary>
+        ///     The hashcode of this element is only its identifier. The structure to which
+        ///     the group belongs is not relevant
+        /// </summary>
+        /// <returns>The hash of the identifier</returns>
         public override int GetHashCode() {
             return Identifier.GetHashCode();
+        }
+
+        public override object evaluate() {
+            return Identifier;
+        }
+
+        public override string ToLaTeX() {
+            return structure.DisplayElement(this);
+        }
+
+        public override string ClassLaTeX() {
+            return structure.ToLaTeX();
         }
     }
 }

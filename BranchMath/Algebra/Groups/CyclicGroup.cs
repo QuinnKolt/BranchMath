@@ -1,8 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Collections.Immutable;
-using System.Numerics;
-using System.Threading.Tasks;
-using BranchMath.Tree;
+﻿using System.Numerics;
+using BranchMath.Value;
 
 namespace BranchMath.Algebra.Groups {
     /// <summary>
@@ -17,55 +14,47 @@ namespace BranchMath.Algebra.Groups {
         public CyclicGroup(int order) {
             if (order <= 0) throw new InvalidGroupException("No cyclic group of negative order");
             Elements = new ExplicitSet<AlgebraicElement<BigInteger>>();
-            for (BigInteger i = 0; i < order / 2; ++i) {
-                ((ExplicitSet<AlgebraicElement<BigInteger>>) Elements).Elements.Add(new AlgebraicElement<BigInteger>(i));
-            }
+            for (BigInteger i = 0; i < order / 2; ++i)
+                ((ExplicitSet<AlgebraicElement<BigInteger>>) Elements).Elements.Add(
+                    new GroupElement<BigInteger>(i, this));
         }
 
-        /// <summary>
-        ///     Find the product of two elements in the group by summing the order of the individual elements
-        /// </summary>
-        /// <param name="g">The first element to multiply.</param>
-        /// <param name="h">The second element to multiply.</param>
-        /// <returns>The element gh.</returns>
-        public override AlgebraicElement<BigInteger> MultiplyElements(AlgebraicElement<BigInteger> g, AlgebraicElement<BigInteger> h) {
+        public override GroupElement<BigInteger> MultiplyElements(GroupElement<BigInteger> g,
+            GroupElement<BigInteger> h) {
             try {
-                var ord = order().evaluate().Value;
-                return new AlgebraicElement<BigInteger>((g.Identifier + h.Identifier) % ord);
+                var ord = ((BigInteger?) order().evaluate()).Value;
+                return new GroupElement<BigInteger>((g.Identifier + h.Identifier) % ord, this);
             }
             catch {
                 throw new InvalidElementException("Element not in group");
             }
         }
 
-        /// <summary>
-        ///     Find the inverse of the given element in the group by negating the order of the element.
-        /// </summary>
-        /// <param name="g">The element to find the inverse of</param>
-        /// <returns>The inverse of the given element</returns>
-        public override AlgebraicElement<BigInteger> GetInverse(AlgebraicElement<BigInteger> g) {
+        public override GroupElement<BigInteger> GetInverse(GroupElement<BigInteger> g) {
             try {
-                var ord = order().evaluate().Value;
-                return new AlgebraicElement<BigInteger>((ord - g.Identifier) % ord);
+                var ord = ((BigInteger?) order().evaluate()).Value;
+                return new GroupElement<BigInteger>((ord - g.Identifier) % ord, this);
             }
             catch {
                 throw new InvalidElementException("Element not in group");
             }
         }
 
-        /// <summary>
-        ///     Give the LaTeX representation of the element of the group by writing the element as a
-        ///     power of the generator.
-        /// </summary>
-        /// <param name="g">The element to display</param>
-        /// <returns>The LaTeX representation of g</returns>
+        public override GroupElement<BigInteger> GetIdentity() {
+            return new GroupElement<BigInteger>(0, this);
+        }
+
         public override string DisplayElement(AlgebraicElement<BigInteger> g) {
             var iden = g.Identifier;
             if (iden == 0) return "e";
 
             if (iden == 1) return "g";
 
-            return "g^{" + iden + "}";
+            return $"g^{iden}";
+        }
+
+        public override string ToLaTeX() {
+            return "C" + order().ToLaTeX();
         }
     }
 }

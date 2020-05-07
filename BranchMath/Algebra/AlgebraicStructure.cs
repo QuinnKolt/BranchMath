@@ -1,15 +1,18 @@
-﻿using BranchMath.Numbers;
-using BranchMath.Tree;
+﻿using BranchMath.Arithmetic.Number;
+using BranchMath.Arithmetic.Numbers;
+using BranchMath.Value;
 
 namespace BranchMath.Algebra {
     /// <summary>
     ///     Represents an algebraic structure of some type
     /// </summary>
     /// <typeparam name="I">The type identifier of the elements of the structure</typeparam>
-    public abstract class AlgebraicStructure<I> : ValueType {
-        
+    public abstract class AlgebraicStructure<I> : AtomicValueType {
+        /// <summary>
+        ///     The set of elements in the algebraic structure
+        /// </summary>
         public Set<AlgebraicElement<I>> Elements = new ExplicitSet<AlgebraicElement<I>>();
-        
+
         /// <summary>
         ///     Give the LaTeX representation of the element of the structure
         /// </summary>
@@ -22,7 +25,7 @@ namespace BranchMath.Algebra {
         /// </summary>
         /// <returns>The number of elements in the Algebraic Structure</returns>
         public Cardinal order() {
-            return Elements.getCardinality();
+            return Elements.GetCardinality();
         }
     }
 }

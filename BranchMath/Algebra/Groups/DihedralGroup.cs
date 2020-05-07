@@ -1,6 +1,5 @@
 ﻿using System.Numerics;
-using System.Threading.Tasks;
-using BranchMath.Tree;
+using BranchMath.Value;
 
 namespace BranchMath.Algebra.Groups {
     /// <summary>
@@ -17,27 +16,30 @@ namespace BranchMath.Algebra.Groups {
 
             Elements = new ExplicitSet<AlgebraicElement<BigInteger[]>>();
             for (BigInteger i = 0; i < order / 2; ++i) {
-                ((ExplicitSet<AlgebraicElement<BigInteger[]>>) Elements).Elements.Add(new AlgebraicElement<BigInteger[]>(new[] {0, i}));
-                ((ExplicitSet<AlgebraicElement<BigInteger[]>>) Elements).Elements.Add(new AlgebraicElement<BigInteger[]>(new[] {1, i}));
+                ((ExplicitSet<AlgebraicElement<BigInteger[]>>) Elements).Elements.Add(
+                    new GroupElement<BigInteger[]>(new[] {0, i}, this));
+                ((ExplicitSet<AlgebraicElement<BigInteger[]>>) Elements).Elements.Add(
+                    new GroupElement<BigInteger[]>(new[] {1, i}, this));
             }
         }
 
-        public override AlgebraicElement<BigInteger[]> MultiplyElements(AlgebraicElement<BigInteger[]> g, AlgebraicElement<BigInteger[]> h) {
+        public override GroupElement<BigInteger[]> MultiplyElements(GroupElement<BigInteger[]> g,
+            GroupElement<BigInteger[]> h) {
             try {
                 var ideng = g.Identifier;
                 var idenh = h.Identifier;
-                var ord = order().evaluate().Value;
+                var ord = ((BigInteger?) order().evaluate()).Value;
                 if (ideng[0] % 2 == 0 && idenh[0] % 2 == 0)
-                    return new AlgebraicElement<BigInteger[]>(new[] {0, (ideng[1] + idenh[1]) % (ord / 2)});
+                    return new GroupElement<BigInteger[]>(new[] {0, (ideng[1] + idenh[1]) % (ord / 2)}, this);
 
                 if (ideng[0] % 2 == 1 && idenh[0] % 2 == 0)
-                    return new AlgebraicElement<BigInteger[]>(new[] {1, (ideng[1] + idenh[1]) % (ord / 2)});
+                    return new GroupElement<BigInteger[]>(new[] {1, (ideng[1] + idenh[1]) % (ord / 2)}, this);
 
                 if (ideng[0] % 2 == 0 && idenh[0] % 2 == 1)
-                    return new AlgebraicElement<BigInteger[]>(new[] {1, (ord / 2 - ideng[1] + idenh[1]) % (ord / 2)});
+                    return new GroupElement<BigInteger[]>(new[] {1, (ord / 2 - ideng[1] + idenh[1]) % (ord / 2)}, this);
 
                 if (ideng[0] % 2 == 1 && idenh[0] % 2 == 1)
-                    return new AlgebraicElement<BigInteger[]>(new[] {0, (ord / 2 - ideng[1] + idenh[1]) % (ord / 2)});
+                    return new GroupElement<BigInteger[]>(new[] {0, (ord / 2 - ideng[1] + idenh[1]) % (ord / 2)}, this);
             }
             catch {
                 throw new InvalidElementException("Element not in group");
@@ -46,11 +48,15 @@ namespace BranchMath.Algebra.Groups {
             throw new InvalidElementException("Element not in group");
         }
 
-        public override AlgebraicElement<BigInteger[]> GetInverse(AlgebraicElement<BigInteger[]> g) {
-            var ord = order().evaluate().Value;
+        public override GroupElement<BigInteger[]> GetInverse(GroupElement<BigInteger[]> g) {
+            var ord = ((BigInteger?) order().evaluate()).Value;
             return g.Identifier[0] == 0
-                ? new AlgebraicElement<BigInteger[]>(new[] {0, ord / 2 - g.Identifier[1] % (ord / 2)})
+                ? new GroupElement<BigInteger[]>(new[] {0, ord / 2 - g.Identifier[1] % (ord / 2)}, this)
                 : g;
+        }
+
+        public override GroupElement<BigInteger[]> GetIdentity() {
+            return new GroupElement<BigInteger[]>(new BigInteger[] {0, 0}, this);
         }
 
         public override string DisplayElement(AlgebraicElement<BigInteger[]> g) {
@@ -66,8 +72,8 @@ namespace BranchMath.Algebra.Groups {
             return str + "r^{" + iden[1] + "}";
         }
 
-        public override string ToString() {
-            return "D" + order();
+        public override string ToLaTeX() {
+            return "D" + order().ToLaTeX();
         }
     }
 }
