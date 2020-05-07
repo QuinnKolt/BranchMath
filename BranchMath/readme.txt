@@ -51,7 +51,7 @@ TODO: ConversionRule - Represents a rule for converting a certain type of LaTeX 
 ==========================================Normal Forms==========================================
 
 
-We still need to determine precisely what our preferred normal forms are, but ideally they are not necessarily the smallest tree, but rather the most useful for algebraic manipulation. Potentially, the rule could be that the primary focus independent variable should appear in as few nodes as possible, ideally precisely one.
+We still need to determine precisely what our preferred normal forms are, but ideally they are not necessarily the smallest tree, but rather the most useful for algebraic manipulation. Potentially, the rule could be that the primary focus independent variable should appear in as few nodes as possible, ideally precisely one. This should have a default, but be adjustable by changing the rules in a personalized database.
 
 
 ================================================================================================
