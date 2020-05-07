@@ -19,10 +19,11 @@ The primary goals of this project:
 	+ Be able to translate the operation tree to and from plaintext function representation
 	+ Be able to represent operation tree using a variety of different GUIs and PTUIs
 	+ Network this software such that a client can perform this operations online if a server is running
-	+ Use multithreading to efficiently perform calculations where possible
+	+ Use parallelism to efficiently perform calculations where possible
 	+ Be both as general and as precise as possible
 	+ Implement many algorithms for numerical computations and exact simplifications
 	+ Be able to isolate variables and solve equations numerically and exactly
+	+ Use a database to store simplification and conversion rules and import them into the program as relevant functions are used
 
 ===========================================Structure============================================
 
