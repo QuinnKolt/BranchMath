@@ -18,9 +18,13 @@ namespace BranchMath.Value {
         /// <returns>Whether or not the value is in this set</returns>
         public abstract bool IsElement(T obj);
 
-        public override string ClassLaTeX() {
+        public string ClassLaTeX() {
             return "\\mathrm{Set}";
         }
+
+        public abstract object evaluate();
+
+        public abstract string ToLaTeX();
 
         public abstract bool IsSubset(Set<T> set);
     }

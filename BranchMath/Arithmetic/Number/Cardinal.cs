@@ -11,15 +11,15 @@ namespace BranchMath.Arithmetic.Number {
             this.card_val = card_val;
         }
 
-        public override object evaluate() {
+        public virtual object evaluate() {
             return is_finite() ? int_val : null;
         }
 
-        public override string ClassLaTeX() {
+        public virtual string ClassLaTeX() {
             return "X";
         }
 
-        public override bool is_finite() {
+        public virtual bool is_finite() {
             return card_val == 0;
         }
 
@@ -54,13 +54,13 @@ namespace BranchMath.Arithmetic.Number {
             throw new ArithmeticException("Indeterminant form");
         }
 
-        public override string ToLaTeX() {
+        public virtual string ToLaTeX() {
             if (is_finite())
                 return int_val.ToString();
             return "\\aleph " + card_val;
         }
 
-        public Cardinal powerset() {
+        public virtual Cardinal powerset() {
             if (is_finite()) {
                 var pow = BigInteger.One;
                 for (var b = BigInteger.Zero; b < int_val.Value; b++) pow *= 2;

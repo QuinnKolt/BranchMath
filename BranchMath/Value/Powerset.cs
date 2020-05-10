@@ -15,7 +15,7 @@ namespace BranchMath.Value {
             this.set = set;
         }
 
-        public override object evaluate() {
+        public object evaluate() {
             switch (set) {
                 case ExplicitSet<I> explicitSet: {
                     var subsets = new ExplicitSet<Set<I>>();

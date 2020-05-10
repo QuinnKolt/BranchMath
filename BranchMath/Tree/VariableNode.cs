@@ -19,7 +19,7 @@ namespace BranchMath.Tree {
             this.rep = rep;
         }
 
-        public override string ToLaTeX() {
+        public string ToLaTeX() {
             return rep;
         }
     }

@@ -5,5 +5,5 @@ namespace BranchMath.Tree {
     ///     This represents a leaf on the operation tree: either a variable or a constant
     /// </summary>
     /// <typeparam name="V">The type of object which this node stores</typeparam>
-    public abstract class ValueNode<V> : Node<V> where V : ValueType { }
+    public interface ValueNode<out V> : Node<V> where V : ValueType { }
 }

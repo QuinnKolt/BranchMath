@@ -10,19 +10,19 @@
             x = null;
         }
 
-        public override bool is_finite() {
+        public virtual bool is_finite() {
             return true;
         }
 
-        public override object evaluate() {
+        public virtual object evaluate() {
             return x;
         }
 
-        public override string ToLaTeX() {
+        public virtual string ToLaTeX() {
             return x.ToString();
         }
 
-        public override string ClassLaTeX() {
+        public virtual string ClassLaTeX() {
             return "\\mathbb{R}";
         }
     }

@@ -11,19 +11,19 @@ namespace BranchMath.Arithmetic.Number {
 
         public double TOLERANCE { get; } = 1e-8;
 
-        public override bool is_finite() {
+        public virtual bool is_finite() {
             return true;
         }
 
-        public override object evaluate() {
+        public virtual object evaluate() {
             return z;
         }
 
-        public override string ClassLaTeX() {
+        public virtual string ClassLaTeX() {
             return "\\mathbb{C}";
         }
 
-        public override string ToLaTeX() {
+        public virtual string ToLaTeX() {
             if (Math.Abs(z.Real) > TOLERANCE && Math.Abs(z.Imaginary) > TOLERANCE)
                 return z.Real + z.Imaginary + "i";
             if (Math.Abs(z.Real) > TOLERANCE)

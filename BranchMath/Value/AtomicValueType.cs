@@ -7,8 +7,12 @@
         ///     Evaluate will simply return this object because it cannot be simplified.
         /// </summary>
         /// <returns>this</returns>
-        public override object evaluate() {
+        public virtual object evaluate() {
             return this;
         }
+
+        public abstract string ToLaTeX();
+
+        public abstract string ClassLaTeX();
     }
 }

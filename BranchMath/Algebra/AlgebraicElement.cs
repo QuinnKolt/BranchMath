@@ -46,15 +46,15 @@ namespace BranchMath.Algebra {
             return Identifier.GetHashCode();
         }
 
-        public override object evaluate() {
+        public virtual object evaluate() {
             return Identifier;
         }
 
-        public override string ToLaTeX() {
+        public virtual string ToLaTeX() {
             return structure.DisplayElement(this);
         }
 
-        public override string ClassLaTeX() {
+        public virtual string ClassLaTeX() {
             return structure.ToLaTeX();
         }
     }

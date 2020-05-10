@@ -1,13 +1,31 @@
-﻿using System.Numerics;
+﻿using System;
+using System.Numerics;
 
 namespace BranchMath.Arithmetic.Number {
     public class Natural : Integer {
-        public Natural(BigInteger n) : base(n) { }
+        public static readonly Natural ONE = new Natural(1);
+        public Natural(BigInteger n) : base(n) {
+            if(n <= 0) throw new InvalidCastException("Naturals start with 1."); 
+        }
 
-        public BigInteger gcd(Natural n) {
-            if (numerator % n.numerator == 0)
-                return n.numerator;
-            return n.gcd(new Natural(numerator % n.numerator));
+        public Natural gcd(Natural n) {
+            return numerator % n.numerator == 0 ? n : n.gcd(new Natural(numerator % n.numerator));
+        }
+        
+        public static Natural operator *(Natural a, Natural b) {
+            return new Natural(a.numerator * b.numerator);
+        }
+
+        public static Natural operator +(Natural a, Natural b) {
+            return new Natural(a.numerator + b.numerator);
+        }
+        
+        public static Natural operator ++(Natural a) {
+            return a + ONE;
+        }
+
+        public static Natural operator ^(Natural b, Natural p) {
+            return new Natural(BigInteger.Pow(b.numerator, p));
         }
 
         public static explicit operator Natural(byte n) {

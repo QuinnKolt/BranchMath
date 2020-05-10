@@ -1,4 +1,5 @@
-﻿using System.Numerics;
+﻿using System;
+using System.Numerics;
 
 namespace BranchMath.Arithmetic.Number {
     public class Rational : RealNumber {
@@ -6,6 +7,9 @@ namespace BranchMath.Arithmetic.Number {
         protected readonly BigInteger numerator;
 
         public Rational(BigInteger numerator, BigInteger denominator) {
+            if(denominator == 0)
+                throw new DivideByZeroException();
+            
             this.numerator = numerator;
             this.denominator = denominator;
         }
@@ -13,6 +17,19 @@ namespace BranchMath.Arithmetic.Number {
         public static Rational operator +(Rational a, Rational b) {
             return new Rational(a.numerator * b.denominator+ b.numerator * a.denominator, 
                 a.denominator * b.denominator);
+        }
+        
+        
+        public static Rational operator /(Rational n, Rational d) {
+            return new Rational(n.numerator * d.denominator, d.numerator * n.denominator);
+        }
+
+        public static Rational operator ^(Rational b, Integer p) {
+            if (p > 0)
+                return new Rational(BigInteger.Pow(b.numerator, p), BigInteger.Pow(b.denominator, p));
+            if (p < 0)
+                return new Rational( BigInteger.Pow(b.denominator, p), BigInteger.Pow(b.numerator, p));
+            return new Natural(1);
         }
         
         public override string ToLaTeX() {

@@ -24,7 +24,7 @@ namespace BranchMath.Algebra {
         ///     The size of the structure
         /// </summary>
         /// <returns>The number of elements in the Algebraic Structure</returns>
-        public Cardinal order() {
+        public virtual Cardinal order() {
             return Elements.GetCardinality();
         }
     }

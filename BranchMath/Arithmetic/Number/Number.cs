@@ -1,7 +1,7 @@
 ﻿using BranchMath.Value;
 
 namespace BranchMath.Arithmetic.Number {
-    public abstract class Number : ValueType {
-        public abstract bool is_finite();
+    public interface Number : ValueType {
+        public bool is_finite();
     }
 }

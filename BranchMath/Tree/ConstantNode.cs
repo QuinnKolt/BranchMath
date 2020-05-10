@@ -18,7 +18,7 @@ namespace BranchMath.Tree {
             this.value = value;
         }
 
-        public override string ToLaTeX() {
+        public string ToLaTeX() {
             return value.ToLaTeX();
         }
     }

@@ -8,14 +8,14 @@
 
         public ValueType this[int i] => entries[i];
 
-        public override object evaluate() {
+        public object evaluate() {
             var vals = new object[entries.Length];
             for (var i = 0; i < entries.Length; ++i) vals[i] = entries[i].evaluate();
 
             return vals;
         }
 
-        public override string ToLaTeX() {
+        public string ToLaTeX() {
             var latex = "(";
             for (var i = 0; i < entries.Length; ++i) {
                 latex += entries[i].ToLaTeX();
@@ -28,7 +28,7 @@
             return latex;
         }
 
-        public override string ClassLaTeX() {
+        public string ClassLaTeX() {
             var latex = "";
             for (var i = 0; i < entries.Length; ++i) {
                 latex += entries[i].ClassLaTeX();
