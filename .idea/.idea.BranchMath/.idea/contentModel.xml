@@ -47,6 +47,7 @@
         <e p="Probability" t="Include">
           <e p="RandomVariable" t="Include">
             <e p="BinomialRandomVariable.cs" t="Include" />
+            <e p="NegativeBinomialRandomVariable.cs" t="Include" />
             <e p="RandomVariable.cs" t="Include" />
           </e>
         </e>
@@ -55,8 +56,8 @@
         <e p="Tree" t="Include">
           <e p="ConstantNode.cs" t="Include" />
           <e p="InvalidOperationException.cs" t="Include" />
-          <e p="MappingNode.cs" t="Include" />
           <e p="Node.cs" t="Include" />
+          <e p="OperationNode.cs" t="Include" />
           <e p="SimplificationRule.cs" t="Include" />
           <e p="ValueNode.cs" t="Include" />
           <e p="VariableNode.cs" t="Include" />
