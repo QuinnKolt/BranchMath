@@ -19,10 +19,11 @@ The primary goals of this project:
 	+ Be able to translate the operation tree to and from plaintext function representation
 	+ Be able to represent operation tree using a variety of different GUIs and PTUIs
 	+ Network this software such that a client can perform this operations online if a server is running
-	+ Use multithreading to efficiently perform calculations where possible
+	+ Use parallelism to efficiently perform calculations where possible
 	+ Be both as general and as precise as possible
 	+ Implement many algorithms for numerical computations and exact simplifications
 	+ Be able to isolate variables and solve equations numerically and exactly
+	+ Use a database to store simplification and conversion rules and import them into the program as relevant functions are used
 
 ===========================================Structure============================================
 
@@ -50,7 +51,7 @@ TODO: ConversionRule - Represents a rule for converting a certain type of LaTeX 
 ==========================================Normal Forms==========================================
 
 
-We still need to determine precisely what our preferred normal forms are, but ideally they are not necessarily the smallest tree, but rather the most useful for algebraic manipulation. Potentially, the rule could be that the primary focus independent variable should appear in as few nodes as possible, ideally precisely one.
+We still need to determine precisely what our preferred normal forms are, but ideally they are not necessarily the smallest tree, but rather the most useful for algebraic manipulation. Potentially, the rule could be that the primary focus independent variable should appear in as few nodes as possible, ideally precisely one. This should have a default, but be adjustable by changing the rules in a personalized database.
 
 
 ================================================================================================
