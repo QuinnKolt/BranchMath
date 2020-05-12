@@ -9,15 +9,15 @@ namespace BranchMath.Arithmetic.Number {
         }
 
         public Natural gcd(Natural n) {
-            return numerator % n.numerator == 0 ? n : n.gcd(new Natural(numerator % n.numerator));
+            return val % n.val == 0 ? n : n.gcd(new Natural(val % n.val));
         }
         
         public static Natural operator *(Natural a, Natural b) {
-            return new Natural(a.numerator * b.numerator);
+            return new Natural(a.val * b.val);
         }
 
         public static Natural operator +(Natural a, Natural b) {
-            return new Natural(a.numerator + b.numerator);
+            return new Natural(a.val + b.val);
         }
         
         public static Natural operator ++(Natural a) {
@@ -25,7 +25,7 @@ namespace BranchMath.Arithmetic.Number {
         }
 
         public static Natural operator ^(Natural b, Natural p) {
-            return new Natural(BigInteger.Pow(b.numerator, p));
+            return new Natural(BigInteger.Pow(b.val, p));
         }
 
         public static explicit operator Natural(byte n) {
@@ -54,6 +54,11 @@ namespace BranchMath.Arithmetic.Number {
 
         public static explicit operator Natural(ulong n) {
             return new Natural(n);
+        }
+        
+        
+        public string ClassLaTeX() {
+            return "\\mathbb{N}_{1}";
         }
     }
 }

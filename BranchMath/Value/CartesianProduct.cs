@@ -9,26 +9,10 @@ namespace BranchMath.Value {
     ///     Represents the cartesian product operator.
     /// </summary>
     /// <typeparam name="I">The value type of the sets</typeparam>
-    public class CartesianProduct<I> : Mapping<Set<Tuple>> where I : ValueType {
-        public HashSet<Tuple> explicitCart;
-        private readonly Set<I>[] sets;
+    public class CartesianProduct<I> : Mapping<Set<I>, Set<Tuple<I>>> where I : ValueType {
+        public CartesianProduct() : base(-1) { }
 
-        public CartesianProduct(Set<I>[] sets) {
-            this.sets = sets;
-        }
-
-        public CartesianProduct(ExplicitSet<I>[] sets) {
-            this.sets = new Set<I>[sets.Length];
-            for (var i = 0; i < sets.Length; ++i) this.sets[i] = sets[i];
-
-            explicitCart = collectElements(sets).ToHashSet();
-        }
-
-        public override object evaluate() {
-            return null;
-        }
-
-        public override string ToLaTeX() {
+        public override string ToLaTeX(Set<I>[] sets) {
             var latex = "";
             for (var i = 0; i < sets.Length; ++i) {
                 latex += sets[i].ToLaTeX();
@@ -39,12 +23,16 @@ namespace BranchMath.Value {
             return latex;
         }
 
-        public override string ClassLaTeX() {
-            var latex = "";
-            for (var i = 1; i < sets.Length; ++i) latex += "\\mathrm{Set}\\times";
-            latex += "\\mathrm{Set} \\to \\mathrm{Set}";
+        public override string ToLaTeX() {
+            throw new NotImplementedException();
+        }
 
-            return latex;
+        public override Set<Tuple<I>> evaluate(Set<I>[] input) {
+            throw new NotImplementedException();
+        }
+
+        public override string ClassLaTeX() {
+            return "\\mathrm{Set}^{n}";
         }
 
         /// <summary>
@@ -52,13 +40,13 @@ namespace BranchMath.Value {
         /// </summary>
         /// <param name="sets">The groups to compute the cartesian product of</param>
         /// <returns>A bag of all of the elements in the cartesian product</returns>
-        private static ConcurrentBag<Tuple> collectElements(ExplicitSet<I>[] sets) {
-            var elements = new ConcurrentBag<Tuple>();
+        private static ConcurrentBag<Tuple<I>> collectElements(ExplicitSet<I>[] sets) {
+            var elements = new ConcurrentBag<Tuple<I>>();
             // If there is only one set, convert the identifiers to singleton arrays of elements
             // containing their identifiers
             if (sets.Length == 1) {
                 Parallel.ForEach(sets[0].Elements, el =>
-                    elements.Add(new Tuple(new ValueType[] {el}))
+                    elements.Add(new Tuple<I>(new I[] {el}))
                 );
             }
 
@@ -72,11 +60,11 @@ namespace BranchMath.Value {
                 // recursively
                 Parallel.ForEach(sets[0].Elements, elem =>
                     Parallel.ForEach(otherGroupElems, el => {
-                        var tup = new ValueType[sets.Length];
+                        var tup = new I[sets.Length];
                         tup[0] = elem;
 
-                        Parallel.For(1, sets.Length, i => { tup[i] = el[i - 1]; });
-                        var comb = new Tuple(tup);
+                        Parallel.For(1, sets.Length, (int i) => { tup[i] = el[i - 1]; });
+                        var comb = new Tuple<I>(tup);
                         elements.Add(comb);
                     })
                 );

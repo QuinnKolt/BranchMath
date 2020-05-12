@@ -1,12 +1,12 @@
 ﻿namespace BranchMath.Value {
-    public class Tuple : ValueType {
-        private readonly ValueType[] entries;
+    public class Tuple<I> : ValueType where I : ValueType {
+        private readonly I[] entries;
 
-        public Tuple(ValueType[] entries) {
+        public Tuple(I[] entries) {
             this.entries = entries;
         }
 
-        public ValueType this[int i] => entries[i];
+        public I this[int i] => entries[i];
 
         public object evaluate() {
             var vals = new object[entries.Length];

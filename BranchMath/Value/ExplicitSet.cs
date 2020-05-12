@@ -21,7 +21,7 @@ namespace BranchMath.Value {
         ///     Construct a mathematical set given a HashSet
         /// </summary>
         /// <param name="elements">The collection of objects in the set</param>
-        public ExplicitSet(HashSet<I> elements) {
+        public ExplicitSet(IEnumerable<I> elements) {
             Elements = elements.ToHashSet();
         }
 

@@ -1,6 +1,7 @@
-﻿using System;
+﻿
+
+using System;
 using BranchMath.Arithmetic.Number;
-using BranchMath.Arithmetic.Numbers;
 using BranchMath.Value;
 using ValueType = BranchMath.Value.ValueType;
 
@@ -17,15 +18,6 @@ namespace BranchMath.Probability.RandomVariable {
         /// </summary>
         protected static Random rng = new Random();
         
-        public static RandomVariable<Rational> operator +(RandomVariable<Rational> a, RandomVariable<Rational> b) {
-            return new CombinedRandomVariable<Rational>(() => a.realize() + b.realize());
-        }
-        
-        
-        public static RandomVariable<Integer> operator +(RandomVariable<Integer> a, RandomVariable<Integer> b) {
-            return new CombinedRandomVariable<Integer>(() => a.realize() + b.realize());
-        }
-
         public override string ClassLaTeX() {
             throw new NotImplementedException();
         }

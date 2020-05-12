@@ -1,7 +1,25 @@
-﻿namespace BranchMath.Value {
+﻿using System;
+
+namespace BranchMath.Value {
     /// <summary>
     ///     Represents a mathematical function in terms of its actual value
     /// </summary>
     /// <typeparam name="C">The ambient codomain of the function</typeparam>
-    public abstract class Mapping<C> : AtomicValueType where C : ValueType { }
+    /// <typeparam name="D">The domain of the function</typeparam>
+    public abstract class Mapping<D, C> : AtomicValueType where C : ValueType where D : ValueType {
+        public readonly int arity;
+
+        public Mapping(int arity) {
+            this.arity = arity;
+        }
+        
+        
+        public Mapping() {
+            arity = 1;
+        }
+
+        public abstract C evaluate(D[] input);
+
+        public abstract string ToLaTeX(D[] inputs);
+    }
 }

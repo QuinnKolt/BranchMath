@@ -2,9 +2,11 @@
 using System.Numerics;
 
 namespace BranchMath.Arithmetic.Number {
-    public class Rational : RealNumber {
-        protected readonly BigInteger denominator;
-        protected readonly BigInteger numerator;
+    public class Rational : Number {
+        public static readonly Rational ZERO = new Rational(0,1);
+        public static readonly Rational ONE = new Rational(1,1);
+        internal readonly BigInteger denominator;
+        internal readonly BigInteger numerator;
 
         public Rational(BigInteger numerator, BigInteger denominator) {
             if(denominator == 0)
@@ -31,13 +33,21 @@ namespace BranchMath.Arithmetic.Number {
                 return new Rational( BigInteger.Pow(b.denominator, p), BigInteger.Pow(b.numerator, p));
             return new Natural(1);
         }
-        
-        public override string ToLaTeX() {
+
+        public virtual object evaluate() {
+            return Integer.ToLong(numerator) / (double) Integer.ToLong(denominator);
+        }
+
+        public virtual string ToLaTeX() {
             return denominator != 1 ? $"\\dfrac{numerator}{denominator}" : numerator.ToString();
         }
 
-        public override string ClassLaTeX() {
+        public virtual string ClassLaTeX() {
             return "\\mathbb{Q}";
+        }
+
+        public bool is_finite() {
+            return true;
         }
     }
 }

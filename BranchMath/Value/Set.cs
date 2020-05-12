@@ -1,4 +1,5 @@
-﻿using BranchMath.Arithmetic.Number;
+﻿using System.Collections.Generic;
+using BranchMath.Arithmetic.Number;
 using BranchMath.Arithmetic.Numbers;
 
 namespace BranchMath.Value {

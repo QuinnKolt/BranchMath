@@ -1,4 +1,5 @@
-﻿using BranchMath.Value;
+﻿using System;
+using ValueType = BranchMath.Value.ValueType;
 
 namespace BranchMath.Tree {
     /// <summary>
@@ -17,6 +18,10 @@ namespace BranchMath.Tree {
         /// <param name="rep">The LaTeX representation of the variable</param>
         public VariableNode(string rep) {
             this.rep = rep;
+        }
+
+        public I evaluate() {
+            throw new NullReferenceException();
         }
 
         public string ToLaTeX() {

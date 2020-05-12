@@ -18,6 +18,10 @@ namespace BranchMath.Tree {
             this.value = value;
         }
 
+        public V evaluate() {
+            return value;
+        }
+
         public string ToLaTeX() {
             return value.ToLaTeX();
         }
