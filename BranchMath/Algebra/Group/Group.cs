@@ -1,9 +1,16 @@
-﻿namespace BranchMath.Algebra.Groups {
+﻿namespace BranchMath.Algebra.Group {
     /// <summary>
     ///     Represents a mathematical group with a binary operation of multiplication.
     /// </summary>
     /// <typeparam name="I">The type of the identifiers of the elements of the group</typeparam>
     public abstract class Group<I> : AlgebraicStructure<I> {
+        public abstract string DisplayElement(AlgebraicElement<I> g);
+        public abstract string ToLaTeX();
+
+        public string ClassLaTeX() {
+            return "\\mathrm{Group}";
+        }
+
         /// <summary>
         ///     Find the product of two elements in the group.
         /// </summary>
@@ -24,9 +31,5 @@
         /// </summary>
         /// <returns>The multiplicative unit of the group</returns>
         public abstract GroupElement<I> GetIdentity();
-
-        public override string ClassLaTeX() {
-            return "\\mathrm{Group}";
-        }
     }
 }

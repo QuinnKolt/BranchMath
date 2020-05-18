@@ -8,16 +8,30 @@
         <e p="Algebra" t="Include">
           <e p="AlgebraicElement.cs" t="Include" />
           <e p="AlgebraicStructure.cs" t="Include" />
-          <e p="Groups" t="Include">
+          <e p="Field" t="Include">
+            <e p="Field.cs" t="Include" />
+          </e>
+          <e p="Group" t="Include">
             <e p="CyclicGroup.cs" t="Include" />
             <e p="DihedralGroup.cs" t="Include" />
+            <e p="DirectProductGroup.cs" t="Include" />
             <e p="FiniteGroup.cs" t="Include" />
             <e p="Group.cs" t="Include" />
             <e p="GroupElement.cs" t="Include" />
-            <e p="Homomorphism.cs" t="Include" />
           </e>
+          <e p="Homomorphism.cs" t="Include" />
           <e p="InvalidElementException.cs" t="Include" />
           <e p="InvalidStructureException.cs" t="Include" />
+          <e p="Ring" t="Include">
+            <e p="Integers.cs" t="Include" />
+            <e p="PolynomialRing.cs" t="Include" />
+            <e p="Ring.cs" t="Include" />
+            <e p="RingElement.cs" t="Include" />
+          </e>
+        </e>
+        <e p="Analysis" t="Include">
+          <e p="InnerProduct.cs" t="Include" />
+          <e p="Metric.cs" t="Include" />
         </e>
         <e p="Arithmetic" t="Include">
           <e p="Number" t="Include">
@@ -30,12 +44,25 @@
             <e p="Rational.cs" t="Include" />
             <e p="RealNumber.cs" t="Include" />
           </e>
+          <e p="Power.cs" t="Include" />
           <e p="Sum.cs" t="Include" />
         </e>
         <e p="bin" t="ExcludeRecursive" />
         <e p="BranchMath.csproj" t="IncludeRecursive" />
+        <e p="Computing" t="Include">
+          <e p="FormalLanguage" t="Include">
+            <e p="Automaton.cs" t="Include" />
+            <e p="Language.cs" t="Include" />
+            <e p="Regular" t="Include">
+              <e p="DFA.cs" t="Include" />
+            </e>
+          </e>
+        </e>
         <e p="Display" t="Include">
           <e p="Table.cs" t="Include" />
+        </e>
+        <e p="Linear" t="Include">
+          <e p="RingMatrix.cs" t="Include" />
         </e>
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
@@ -47,15 +74,21 @@
         <e p="Probability" t="Include">
           <e p="RandomVariable" t="Include">
             <e p="BinomialRandomVariable.cs" t="Include" />
+            <e p="DiscreteRandomVariable.cs" t="Include" />
             <e p="NegativeBinomialRandomVariable.cs" t="Include" />
             <e p="RandomVariable.cs" t="Include" />
           </e>
         </e>
         <e p="Program.cs" t="Include" />
         <e p="readme.txt" t="Include" />
+        <e p="Topology" t="Include">
+          <e p="MetricSpace.cs" t="Include" />
+          <e p="TopologicalSpace.cs" t="Include" />
+        </e>
         <e p="Tree" t="Include">
           <e p="ConstantNode.cs" t="Include" />
           <e p="InvalidOperationException.cs" t="Include" />
+          <e p="MappingNode.cs" t="Include" />
           <e p="Node.cs" t="Include" />
           <e p="OperationNode.cs" t="Include" />
           <e p="SimplificationRule.cs" t="Include" />
@@ -63,11 +96,12 @@
           <e p="VariableNode.cs" t="Include" />
         </e>
         <e p="value" t="Include">
-          <e p="AtomicValueType.cs" t="Include" />
+          <e p="BiFunction.cs" t="Include" />
           <e p="CartesianProduct.cs" t="Include" />
           <e p="DerivedSet.cs" t="Include" />
           <e p="ExplicitSet.cs" t="Include" />
           <e p="Mapping.cs" t="Include" />
+          <e p="MonoFunction.cs" t="Include" />
           <e p="Powerset.cs" t="Include" />
           <e p="Set.cs" t="Include" />
           <e p="Tuple.cs" t="Include" />

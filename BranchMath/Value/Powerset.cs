@@ -5,8 +5,7 @@ namespace BranchMath.Value {
     ///     The powerset operator
     /// </summary>
     /// <typeparam name="I">The value type of the contents of the original set</typeparam>
-    public class Powerset<I> : Mapping<Set<I>, Set<Set<I>>> where I : ValueType {
-
+    public class Powerset<I> : MonoFunction<Set<I>, Set<Set<I>>> where I : ValueType {
         public static Set<Set<I>> compute(Set<I> set) {
             switch (set) {
                 case ExplicitSet<I> explicitSet: {
@@ -31,16 +30,16 @@ namespace BranchMath.Value {
             }
         }
 
-        public override string ToLaTeX(Set<I>[] set) {
-            return "P(" + set[0].ToLaTeX() + ")";
+        public override string ToLaTeX(Set<I> set) {
+            return "P(" + set.ToLaTeX() + ")";
         }
 
         public override string ToLaTeX() {
             return "\\mathcal{P}";
         }
 
-        public override Set<Set<I>> evaluate(Set<I>[] input) {
-            return compute(input[0]);
+        public override Set<Set<I>> evaluate(Set<I> input) {
+            return compute(input);
         }
 
         public override string ClassLaTeX() {

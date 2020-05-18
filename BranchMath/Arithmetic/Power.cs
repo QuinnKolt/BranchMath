@@ -5,18 +5,18 @@ namespace BranchMath.Arithmetic {
     /// <summary>
     ///     Represents the sum of many numbers
     /// </summary>
-    public class Sum<N> : Mapping<N, N> where N : Number.Number {
-        public Sum() : base(-1) { }
+    public class Power<N, M> : Mapping<N, M> where N : Number.Number where M : Number.Number {
+        public Power() : base(2) { }
 
         public override string ToLaTeX() {
-            return "+";
+            return "^";
         }
 
         public override string ClassLaTeX() {
             throw new NotImplementedException();
         }
 
-        public override N evaluate(N[] input) {
+        public override M evaluate(N[] input) {
             throw new NotImplementedException();
         }
 
@@ -24,14 +24,7 @@ namespace BranchMath.Arithmetic {
         ///     The numbers being added
         /// </summary>
         public override string ToLaTeX(N[] summands) {
-            var latex = "";
-            for (var i = 0; i < summands.Length; ++i) {
-                latex += summands[i].ClassLaTeX();
-                if (i != summands.Length - 1)
-                    latex += " + ";
-            }
-
-            return latex;
+            return $"{summands[0]}^{{{summands[1]}}}";
         }
     }
 }

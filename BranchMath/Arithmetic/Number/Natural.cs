@@ -3,15 +3,16 @@ using System.Numerics;
 
 namespace BranchMath.Arithmetic.Number {
     public class Natural : Integer {
-        public static readonly Natural ONE = new Natural(1);
+        public new static readonly Natural ONE = new Natural(1);
+
         public Natural(BigInteger n) : base(n) {
-            if(n <= 0) throw new InvalidCastException("Naturals start with 1."); 
+            if (n <= 0) throw new InvalidCastException("Naturals start with 1.");
         }
 
         public Natural gcd(Natural n) {
             return val % n.val == 0 ? n : n.gcd(new Natural(val % n.val));
         }
-        
+
         public static Natural operator *(Natural a, Natural b) {
             return new Natural(a.val * b.val);
         }
@@ -19,7 +20,7 @@ namespace BranchMath.Arithmetic.Number {
         public static Natural operator +(Natural a, Natural b) {
             return new Natural(a.val + b.val);
         }
-        
+
         public static Natural operator ++(Natural a) {
             return a + ONE;
         }
@@ -55,9 +56,8 @@ namespace BranchMath.Arithmetic.Number {
         public static explicit operator Natural(ulong n) {
             return new Natural(n);
         }
-        
-        
-        public string ClassLaTeX() {
+
+        public override string ClassLaTeX() {
             return "\\mathbb{N}_{1}";
         }
     }

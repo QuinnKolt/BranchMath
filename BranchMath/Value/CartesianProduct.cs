@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace BranchMath.Value {
@@ -46,7 +44,7 @@ namespace BranchMath.Value {
             // containing their identifiers
             if (sets.Length == 1) {
                 Parallel.ForEach(sets[0].Elements, el =>
-                    elements.Add(new Tuple<I>(new I[] {el}))
+                    elements.Add(new Tuple<I>(new[] {el}))
                 );
             }
 
@@ -63,7 +61,7 @@ namespace BranchMath.Value {
                         var tup = new I[sets.Length];
                         tup[0] = elem;
 
-                        Parallel.For(1, sets.Length, (int i) => { tup[i] = el[i - 1]; });
+                        Parallel.For(1, sets.Length, i => { tup[i] = el[i - 1]; });
                         var comb = new Tuple<I>(tup);
                         elements.Add(comb);
                     })

@@ -4,7 +4,7 @@ using System.Numerics;
 
 namespace BranchMath.Arithmetic.Number {
     public class Integer : Rational {
-        public static readonly Integer ZERO = new Integer(0);
+        public new static readonly Integer ZERO = new Integer(0);
 
         public BigInteger val;
 
@@ -15,19 +15,19 @@ namespace BranchMath.Arithmetic.Number {
         public static Natural operator %(Integer a, Integer b) {
             return new Natural((a.val % b.val + b.val) % b.val);
         }
-        
+
         public static Integer operator +(Integer a, Integer b) {
             return new Integer(a.val + b.val);
         }
-        
+
         public static Integer operator -(Integer a, Integer b) {
             return new Integer(a.val - b.val);
         }
-        
+
         public static Integer operator *(Integer a, Integer b) {
             return new Integer(a.val * b.val);
         }
-        
+
         public static Integer operator ++(Integer a) {
             return a + 1;
         }
@@ -35,22 +35,18 @@ namespace BranchMath.Arithmetic.Number {
         public static Integer operator ^(Integer b, Natural p) {
             return new Integer(BigInteger.Pow(b.val, p));
         }
-        
-        public static Rational operator ^(Integer b, Integer p) {
-            if (p > 0) {
-                return new Rational(BigInteger.Pow(b.val, p), 1);
-            }
-            if (p < 0) {
-                return new Rational(1,BigInteger.Pow(b.val, p));
-            }
 
-            return Rational.ONE;
+        public static Rational operator ^(Integer b, Integer p) {
+            if (p > 0) return new Rational(BigInteger.Pow(b.val, p), 1);
+            if (p < 0) return new Rational(1, BigInteger.Pow(b.val, p));
+
+            return ONE;
         }
 
-        public string ToLaTeX() {
+        public override string ToLaTeX() {
             return $"{val}";
         }
-        
+
         public static implicit operator Integer(byte n) {
             return new Integer(n);
         }
@@ -74,7 +70,7 @@ namespace BranchMath.Arithmetic.Number {
         public static implicit operator Integer(long n) {
             return new Integer(n);
         }
-        
+
         public override object evaluate() {
             return val;
         }
@@ -88,15 +84,14 @@ namespace BranchMath.Arithmetic.Number {
         }
 
         public static long ToLong(BigInteger i) {
-            if(i.GetByteCount() > 8) 
+            if (i.GetByteCount() > 8)
                 throw new InvalidCastException();
             var b = i.ToByteArray();
-            if(BitConverter.IsLittleEndian) 
+            if (BitConverter.IsLittleEndian)
                 b = b.Reverse().ToArray();
             return BitConverter.ToInt64(b);
         }
-        
-        
+
         public override string ClassLaTeX() {
             return "\\mathbb{Z}";
         }

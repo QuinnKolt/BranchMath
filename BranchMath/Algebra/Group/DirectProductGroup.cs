@@ -1,20 +1,18 @@
-﻿using System;
-using System.Threading.Tasks;
-using BranchMath.Tree;
+﻿using System.Threading.Tasks;
 
-namespace BranchMath.Algebra.Groups {
+namespace BranchMath.Algebra.Group {
     /// <summary>
-    ///     Represents the cartesian product of several groups whose group operation is the individual group operations of
+    ///     Represents the direct product of several groups whose group operation is the individual group operations of
     ///     the individual groups.
     /// </summary>
-    public class CartesianProductGroup<I> : Group<I[]> {
+    public class DirectProductGroup<I> : Group<I[]> {
         /// <summary>
         ///     Returns the cartesian product of the groups given
         /// </summary>
         /// <param name="groups">The groups to compute the cartesian product of</param>
-        public CartesianProductGroup(Group<I>[] groups) {
+        public DirectProductGroup(Group<I>[] groups) {
             Groups = groups;
-            Elements = new CartesianProduct<AlgebraicElement<I>>().evaluate();
+            // Elements = new CartesianProduct<AlgebraicElement<I>>().evaluate();
         }
 
         /// <summary>
@@ -28,13 +26,13 @@ namespace BranchMath.Algebra.Groups {
         /// <param name="g">The first element to multiply.</param>
         /// <param name="h">The second element to multiply.</param>
         /// <returns>The element gh.</returns>
-        public override AlgebraicElement<I[]> MultiplyElements(AlgebraicElement<I[]> g,
-            AlgebraicElement<I[]> h) {
+        public override GroupElement<I[]> MultiplyElements(GroupElement<I[]> g,
+            GroupElement<I[]> h) {
             var iden = new I[Groups.Length];
             Parallel.For(0, Groups.Length, i => iden[i] = Groups[i].MultiplyElements(
-                new AlgebraicElement<I>(g.Identifier[i]),
-                new AlgebraicElement<I>(h.Identifier[i])).Identifier);
-            return new AlgebraicElement<I[]>(iden);
+                new GroupElement<I>(g.Identifier[i], Groups[i]),
+                new GroupElement<I>(h.Identifier[i], Groups[i])).Identifier);
+            return new GroupElement<I[]>(iden, this);
         }
 
         /// <summary>
@@ -42,12 +40,23 @@ namespace BranchMath.Algebra.Groups {
         /// </summary>
         /// <param name="g">The element to find the inverse of</param>
         /// <returns>The inverse of the given element</returns>
-        public override AlgebraicElement<I[]> GetInverse(AlgebraicElement<I[]> g) {
+        public override GroupElement<I[]> GetInverse(GroupElement<I[]> g) {
             try {
                 var iden = new I[Groups.Length];
                 Parallel.For(0, Groups.Length, i => iden[i] = Groups[i].GetInverse(
-                    new AlgebraicElement<I>(g.Identifier[i])).Identifier);
-                return new AlgebraicElement<I[]>(iden);
+                    new GroupElement<I>(g.Identifier[i], Groups[i])).Identifier);
+                return new GroupElement<I[]>(iden, this);
+            }
+            catch {
+                throw new InvalidElementException("Element not in Group");
+            }
+        }
+
+        public override GroupElement<I[]> GetIdentity() {
+            try {
+                var iden = new I[Groups.Length];
+                Parallel.For(0, Groups.Length, i => iden[i] = Groups[i].GetIdentity().Identifier);
+                return new GroupElement<I[]>(iden, this);
             }
             catch {
                 throw new InvalidElementException("Element not in Group");
@@ -64,7 +73,7 @@ namespace BranchMath.Algebra.Groups {
             try {
                 var str = "(";
                 for (var i = 0; i < Groups.Length; ++i) {
-                    str += Groups[i].DisplayElement(new AlgebraicElement<I>(g.Identifier[i]));
+                    str += Groups[i].DisplayElement(new GroupElement<I>(g.Identifier[i], Groups[i]));
                     if (i != Groups.Length - 1)
                         str += ",";
                 }
@@ -74,6 +83,17 @@ namespace BranchMath.Algebra.Groups {
             catch {
                 throw new InvalidElementException("Element not in Group");
             }
+        }
+
+        public override string ToLaTeX() {
+            var str = "";
+            for (var i = 0; i < Groups.Length; ++i) {
+                str += Groups[i].ToLaTeX();
+                if (i != Groups.Length - 1)
+                    str += "\\times";
+            }
+
+            return str;
         }
     }
 }

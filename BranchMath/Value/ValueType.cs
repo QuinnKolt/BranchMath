@@ -4,8 +4,10 @@
         ///     If a value type can be converted into an object that represents a specific value, then return that object,
         ///     otherwise, return null
         /// </summary>
-        /// <returns>Either value of ValueType or null</returns>
-        public object evaluate();
+        /// <returns>Either value of ValueType or the object itself</returns>
+        public object evaluate() {
+            return this;
+        }
 
         /// <summary>
         ///     Gets the LaTeX representation of this object

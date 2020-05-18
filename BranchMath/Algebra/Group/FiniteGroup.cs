@@ -1,10 +1,16 @@
 ﻿using System.Linq;
+using BranchMath.Arithmetic.Number;
 using BranchMath.Arithmetic.Numbers;
 using BranchMath.Display;
 using BranchMath.Value;
 
-namespace BranchMath.Algebra.Groups {
+namespace BranchMath.Algebra.Group {
     public abstract class FiniteGroup<I> : Group<I> {
+        /// <summary>
+        ///     The set of elements in the algebraic structure
+        /// </summary>
+        public Set<AlgebraicElement<I>> Elements = new ExplicitSet<AlgebraicElement<I>>();
+
         /// <summary>
         ///     Validate that this is in fact a group structure
         /// </summary>
@@ -36,11 +42,33 @@ namespace BranchMath.Algebra.Groups {
             return new Table<string, string, string>(products, xlabels, ylabels);
         }
 
+        /// <summary>
+        ///     Test if a given subgroup is normal
+        /// </summary>
+        /// <param name="subgroup">The subgroup to test</param>
+        /// <returns>whether or not the group is normal</returns>
+        public bool is_normal(FiniteGroup<I> subgroup) {
+            return !(from g in ((ExplicitSet<AlgebraicElement<I>>) Elements).Elements
+                from h in ((ExplicitSet<AlgebraicElement<I>>) subgroup.Elements).Elements
+                let gg = (GroupElement<I>) g
+                let hg = (GroupElement<I>) h
+                where !subgroup.Elements.IsElement(gg * hg * GetInverse(gg))
+                select gg).Any();
+        }
+
         // /// <summary>
         // ///     Get the possible generators of the group.
         // /// </summary>
         // /// <returns>The multiplicative unit of the group</returns>
         // TODO
         // public abstract Set<Set<GroupElement<I>>> GetGenerators();
+
+        /// <summary>
+        ///     The size of the structure
+        /// </summary>
+        /// <returns>The number of elements in the Algebraic Structure</returns>
+        public virtual Cardinal order() {
+            return Elements.GetCardinality();
+        }
     }
 }

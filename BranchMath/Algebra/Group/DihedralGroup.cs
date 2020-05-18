@@ -1,7 +1,7 @@
 ﻿using System.Numerics;
 using BranchMath.Value;
 
-namespace BranchMath.Algebra.Groups {
+namespace BranchMath.Algebra.Group {
     /// <summary>
     ///     An Implementation of the Dihedral group
     /// </summary>

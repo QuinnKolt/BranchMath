@@ -24,6 +24,18 @@ namespace BranchMath.Algebra {
 
         public AlgebraicStructure<I> structure { protected get; set; }
 
+        public virtual object evaluate() {
+            return Identifier;
+        }
+
+        public virtual string ToLaTeX() {
+            return structure.DisplayElement(this);
+        }
+
+        public virtual string ClassLaTeX() {
+            return structure.ToLaTeX();
+        }
+
         /// <summary>
         ///     Checks if two elements are equal. Note this will only return true if the operation trees have enough
         ///     information about its variables to simplify the elements to be the same
@@ -44,18 +56,6 @@ namespace BranchMath.Algebra {
         /// <returns>The hash of the identifier</returns>
         public override int GetHashCode() {
             return Identifier.GetHashCode();
-        }
-
-        public virtual object evaluate() {
-            return Identifier;
-        }
-
-        public virtual string ToLaTeX() {
-            return structure.DisplayElement(this);
-        }
-
-        public virtual string ClassLaTeX() {
-            return structure.ToLaTeX();
         }
     }
 }

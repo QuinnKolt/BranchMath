@@ -22,8 +22,8 @@ namespace BranchMath.Tree {
         }
 
         /// <summary>
-        /// Get the value of the node in terms of its ValueType. Note: this throws an exception if the node is a
-        /// variable.
+        ///     Get the value of the node in terms of its ValueType. Note: this throws an exception if the node is a
+        ///     variable.
         /// </summary>
         /// <returns>The value of the node.</returns>
         public V evaluate();

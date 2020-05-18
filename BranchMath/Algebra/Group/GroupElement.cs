@@ -1,4 +1,7 @@
-﻿namespace BranchMath.Algebra.Groups {
+﻿using System;
+using BranchMath.Arithmetic.Number;
+
+namespace BranchMath.Algebra.Group {
     /// <summary>
     ///     Represents an element of a group (e.g. an integer in the integers over addition)
     /// </summary>
@@ -19,6 +22,10 @@
         /// <returns>The product of the two elements</returns>
         public static GroupElement<I> operator *(GroupElement<I> g, GroupElement<I> h) {
             return ((Group<I>) g.structure).MultiplyElements(g, h);
+        }
+
+        public static GroupElement<I> operator ^(GroupElement<I> g, Integer n) {
+            throw new NotImplementedException();
         }
     }
 }

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using BranchMath.Arithmetic.Number;
-using BranchMath.Arithmetic.Numbers;
 
 namespace BranchMath.Value {
     /// <summary>

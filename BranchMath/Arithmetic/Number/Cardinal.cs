@@ -3,8 +3,8 @@ using System.Numerics;
 
 namespace BranchMath.Arithmetic.Number {
     public class Cardinal : Number {
-        private readonly BigInteger? int_val;
         private readonly uint card_val;
+        private readonly BigInteger? int_val;
 
         public Cardinal(BigInteger? int_val, uint card_val) {
             this.int_val = int_val;
@@ -21,6 +21,12 @@ namespace BranchMath.Arithmetic.Number {
 
         public virtual bool is_finite() {
             return card_val == 0;
+        }
+
+        public virtual string ToLaTeX() {
+            if (is_finite())
+                return int_val.ToString();
+            return "\\aleph " + card_val;
         }
 
         public static Cardinal operator *(Cardinal a, Cardinal b) {
@@ -52,12 +58,6 @@ namespace BranchMath.Arithmetic.Number {
 
             if (b.is_finite()) return a;
             throw new ArithmeticException("Indeterminant form");
-        }
-
-        public virtual string ToLaTeX() {
-            if (is_finite())
-                return int_val.ToString();
-            return "\\aleph " + card_val;
         }
 
         public virtual Cardinal powerset() {

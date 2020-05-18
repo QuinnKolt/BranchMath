@@ -2,22 +2,24 @@
 
 namespace BranchMath.Probability.RandomVariable {
     /// <summary>
-    /// Represents a negative binomial random variable. A negative binomial random variable is a
-    /// random variable which represents Bernoulli trials, where instead of conducting a specified
-    /// number of trials and counting the number of successes, this specifies the number of successes
-    /// and counts the number of trials.
+    ///     Represents a negative binomial random variable. A negative binomial random variable is a
+    ///     random variable which represents Bernoulli trials, where instead of conducting a specified
+    ///     number of trials and counting the number of successes, this specifies the number of successes
+    ///     and counts the number of trials.
     /// </summary>
-    public class NegativeBinomialRandomVariable : RandomVariable<Integer> {
+    public class NegativeBinomialRandomVariable : DiscreteRandomVariable {
         /// <summary>
-        /// Number of successes needed to stop
+        ///     Number of successes needed to stop
         /// </summary>
         private readonly int k;
+
         /// <summary>
-        /// Probability of a success
+        ///     Probability of a success
         /// </summary>
         private readonly double p;
+
         /// <summary>
-        /// Create a new negative binomial random variable
+        ///     Create a new negative binomial random variable
         /// </summary>
         /// <param name="k">Number of successes needed to stop</param>
         /// <param name="p">Probability of success</param>
@@ -25,13 +27,12 @@ namespace BranchMath.Probability.RandomVariable {
             this.k = k;
             this.p = p;
         }
-        
+
         public override Integer realize() {
             Integer n = 0;
-            for(var i = 0; i < k; ++n) {
+            for (var i = 0; i < k; ++n)
                 if (rng.NextDouble() <= p)
                     ++i;
-            }
 
             return n;
         }
