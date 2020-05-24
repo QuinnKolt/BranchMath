@@ -1,14 +1,17 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Numerics;
+using BranchMath.Algebra.Group;
+using BranchMath.Arithmetic;
 using BranchMath.Arithmetic.Number;
+#pragma warning disable 660,661
 
 namespace BranchMath.Algebra.Ring {
     /// <summary>
     ///     Represents an element of a group (e.g. an integer in the integers over addition)
     /// </summary>
     /// <typeparam name="I">The identifier type of for the elements of this group</typeparam>
-    public class RingElement<I> : AlgebraicElement<I> {
+    public class RingElement<I> : AlgebraicElement<I>, Multipliable<RingElement<I>>, Summable<RingElement<I>>, Powerable<RingElement<I>, Integer> {
         /// <summary>
         ///     Create a new Ring Element
         /// </summary>
@@ -297,6 +300,22 @@ namespace BranchMath.Algebra.Ring {
         /// <returns>The negation of whether or not h is the corresponding ring element</returns>
         public static bool operator !=(int i, RingElement<I> h) {
             return !(h == i);
+        }
+
+        public virtual RingElement<I> times(RingElement<I> a) {
+            return this * a;
+        }
+
+        public virtual RingElement<I> sum(RingElement<I> a) {
+            return this + a;
+        }
+
+        public virtual RingElement<I> pow(Integer p) {
+            return this ^ p;
+        }
+        
+        public static explicit operator GroupElement<I>(RingElement<I> g) {
+            return new GroupElement<I>(g.Identifier, ((Ring<I>)g.structure).additive_group);
         }
     }
 }

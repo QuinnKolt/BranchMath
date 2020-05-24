@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Numerics;
+using BranchMath.Arithmetic;
 using BranchMath.Arithmetic.Number;
 
 namespace BranchMath.Algebra.Group {
@@ -6,7 +8,7 @@ namespace BranchMath.Algebra.Group {
     ///     Represents an element of a group (e.g. an integer in the integers over addition)
     /// </summary>
     /// <typeparam name="I">The identifier type of for the elements of this group</typeparam>
-    public class GroupElement<I> : AlgebraicElement<I> {
+    public class GroupElement<I> : AlgebraicElement<I>, Multipliable<GroupElement<I>>, Powerable<GroupElement<I>, Integer> {
         /// <summary>
         ///     Create a new Group Element
         /// </summary>
@@ -24,8 +26,18 @@ namespace BranchMath.Algebra.Group {
             return ((Group<I>) g.structure).MultiplyElements(g, h);
         }
 
+        public GroupElement<I> times(GroupElement<I> g) {
+            return ((Group<I>) g.structure).MultiplyElements(this, g);
+        }
+
         public static GroupElement<I> operator ^(GroupElement<I> g, Integer n) {
-            throw new NotImplementedException();
+            var pow = g;
+            for (BigInteger i = 1; i < n.val; ++i) pow *= g;
+            return pow;
+        }
+
+        public GroupElement<I> pow(Integer p) {
+            return this ^ p;
         }
     }
 }

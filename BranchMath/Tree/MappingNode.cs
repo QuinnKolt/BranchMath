@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using BranchMath.Value;
 using ValueType = BranchMath.Value.ValueType;
 
@@ -16,14 +17,15 @@ namespace BranchMath.Tree {
         private List<SimplificationRule<C>> rules = new List<SimplificationRule<C>>();
 
         public MappingNode(Mapping<D, C> map, Node<D>[] nodes, List<SimplificationRule<C>> rules) {
-            if (nodes.Length != map.arity && map.arity == -1) throw new InvalidCastException();
+            if (nodes.Length != map.arity && map.arity != -1) throw new InvalidCastException();
             this.nodes = nodes;
             this.map = map;
             this.rules = rules;
         }
 
         public MappingNode(Mapping<D, C> map, Node<D>[] nodes) {
-            if (nodes.Length != map.arity && map.arity == -1) throw new InvalidCastException();
+            if (nodes.Length != map.arity && map.arity != -1) throw new InvalidCastException();
+            this.map = map;
             this.nodes = nodes;
         }
 
@@ -33,6 +35,22 @@ namespace BranchMath.Tree {
         /// <returns></returns>
         public Node<C> simplify() {
             throw new NotImplementedException();
+        }
+
+        public Node<ValueType>[] GetChildren() {
+            var copied = new Node<ValueType>[nodes.Length];
+            for(var i = 0; i < nodes.Length; ++i) {
+                copied[i] = (Node<ValueType>) nodes[i];
+            }
+
+            return copied;
+        }
+
+        public OperationNode<C> CopyWithNewChildren(Node<ValueType>[] children) {
+            var node = new Node<D>[children.Length];
+            for (var i = 0; i < children.Length; ++i)
+                node[i] = (Node<D>) children[i];
+            return new MappingNode<D, C>(map, node, rules);
         }
 
         public C evaluate() {
@@ -48,9 +66,46 @@ namespace BranchMath.Tree {
                 copied[i] = nodes[i].DeepCopy();
             return new MappingNode<D, C>(map, copied);
         }
+        
+        public bool DeepEquals(Node<ValueType> node) {
+            if (!(node is MappingNode<D, C> mapNode)) 
+                return false;
+            
+            if (map != mapNode.map)
+                return false;
+            return !nodes.Where((t, i) => !t.DeepEquals((Node<ValueType>) mapNode.nodes[i])).Any();
+
+        }
 
         public string ToLaTeX() {
             throw new NotImplementedException();
+        }
+
+        public bool Matches(Node<ValueType> node) {
+            if (node is MappingNode<D, C> mappingNode) {
+                return mappingNode.map == map;
+            }
+
+            return false;
+        }
+
+        public string structure(int indents) {
+
+            var str = "";
+            if (indents > 0) {
+                for (var i = 0; i < indents - 1; ++i)
+                    str += "|   ";
+
+                str += "|-  ";
+            }
+            str += map.ToLaTeX() + "\n";
+            for (var i = 0; i < nodes.Length; ++i) {
+                str += nodes[i].structure(indents + 1);
+                if(i < nodes.Length-1) 
+                    str += "\n";
+            }
+
+            return str;
         }
     }
 }

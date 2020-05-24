@@ -5,8 +5,8 @@ namespace BranchMath.Tree {
     /// <summary>
     ///     Represents a variable in
     /// </summary>
-    /// <typeparam name="I"></typeparam>
-    public class VariableNode<I> : ValueNode<I> where I : ValueType {
+    /// <typeparam name="V"></typeparam>
+    public class VariableNode<V> : Variable<V> where V : ValueType {
         /// <summary>
         ///     The representation of this variable in LaTeX (e.g. x or \omega)
         /// </summary>
@@ -20,12 +20,51 @@ namespace BranchMath.Tree {
             this.rep = rep;
         }
 
-        public I evaluate() {
+        public Node<V> DeepCopy() {
+            return this;
+        }
+
+        public V evaluate() {
             throw new NullReferenceException();
         }
 
         public string ToLaTeX() {
             return rep;
+        }
+        
+        public bool Matches(Node<ValueType> node) {
+            return node is Node<V>;
+        }
+
+        public Assignment MakeAssignment(Node<V> node) {
+            return new Assignment(this, node);
+        }
+        
+        public class Assignment {
+            internal VariableNode<V> var;
+            internal Node<V> val;
+            public Assignment(VariableNode<V> var, Node<V> val) {
+                this.var = var;
+                this.val = val;
+            }
+        }
+        
+        public string structure(int indents) {
+
+            var str = "";
+            if (indents > 0) {
+                for (var i = 0; i < indents - 1; ++i)
+                    str += "|   ";
+
+                str += "|-  ";
+            }
+            
+            return  str + rep;
+        }
+
+
+        public bool DeepEquals(Node<ValueType> node) {
+            return this == node;
         }
     }
 }

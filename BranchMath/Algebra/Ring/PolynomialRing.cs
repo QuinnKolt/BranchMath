@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using BranchMath.Algebra.Field;
+using BranchMath.Arithmetic;
+using BranchMath.Arithmetic.Number;
 using BranchMath.Value;
 
 namespace BranchMath.Algebra.Ring {
@@ -104,7 +106,7 @@ namespace BranchMath.Algebra.Ring {
             return new Polynomial(new []{(R) Ring.getZero()}, this);
         }
         
-        public class Polynomial : RingElement<R[]> {
+        public class Polynomial : RingElement<R[]>, Multipliable<Polynomial>, Summable<Polynomial>, Powerable<Polynomial, Integer> {
             
             public readonly R[] Coefficients;
 
@@ -144,6 +146,18 @@ namespace BranchMath.Algebra.Ring {
             
             public static Polynomial operator *(R h, Polynomial g) {
                 return (Polynomial) (new Polynomial(new[] {h}, (PolynomialRing<F, R>) g.structure) * g);
+            }
+
+            public Polynomial times(Polynomial a) {
+                return (Polynomial) (this * a);
+            }
+
+            public Polynomial sum(Polynomial a) {
+                return (Polynomial) (this + a);
+            }
+
+            public new Polynomial pow(Integer p) {
+                return (Polynomial) (this ^ p);
             }
         }
     }

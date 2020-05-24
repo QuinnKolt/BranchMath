@@ -14,12 +14,10 @@ namespace BranchMath.Algebra.Group {
         public DihedralGroup(BigInteger order) {
             if (order % 2 != 0 || order <= 0) throw new InvalidGroupException("No Dihedral group of odd order");
 
-            Elements = new ExplicitSet<AlgebraicElement<BigInteger[]>>();
+            Elements = new ExplicitSet<GroupElement<BigInteger[]>>();
             for (BigInteger i = 0; i < order / 2; ++i) {
-                ((ExplicitSet<AlgebraicElement<BigInteger[]>>) Elements).Elements.Add(
-                    new GroupElement<BigInteger[]>(new[] {0, i}, this));
-                ((ExplicitSet<AlgebraicElement<BigInteger[]>>) Elements).Elements.Add(
-                    new GroupElement<BigInteger[]>(new[] {1, i}, this));
+                Elements.Elements.Add(new GroupElement<BigInteger[]>(new[] {0, i}, this));
+                Elements.Elements.Add(new GroupElement<BigInteger[]>(new[] {1, i}, this));
             }
         }
 
@@ -74,6 +72,10 @@ namespace BranchMath.Algebra.Group {
 
         public override string ToLaTeX() {
             return "D" + order().ToLaTeX();
+        }
+
+        public override bool compare(AlgebraicElement<BigInteger[]> g, AlgebraicElement<BigInteger[]> h) {
+            return g.Identifier[0] == h.Identifier[0] && g.Identifier[1] == h.Identifier[1];
         }
     }
 }

@@ -1,30 +1,26 @@
 ﻿using System;
 using BranchMath.Value;
+using ValueType = BranchMath.Value.ValueType;
 
 namespace BranchMath.Arithmetic {
     /// <summary>
     ///     Represents the sum of many numbers
     /// </summary>
-    public class Power<N, M> : Mapping<N, M> where N : Number.Number where M : Number.Number {
-        public Power() : base(2) { }
-
-        public override string ToLaTeX() {
+    public class Power<B, P> : BiFunction<B, P, B> where B : Powerable<B, P>, ValueType where P : ValueType {
+        public string ToLaTeX() {
             return "^";
         }
 
-        public override string ClassLaTeX() {
+        public string ClassLaTeX() {
             throw new NotImplementedException();
         }
 
-        public override M evaluate(N[] input) {
-            throw new NotImplementedException();
+        public B evaluate(B input1, P input2) {
+            return input1.pow(input2);
         }
 
-        /// <summary>
-        ///     The numbers being added
-        /// </summary>
-        public override string ToLaTeX(N[] summands) {
-            return $"{summands[0]}^{{{summands[1]}}}";
+        public string ToLaTeX(B input1, P input2) {
+            return $"{input1.ToLaTeX()}^{{{input2.ToLaTeX()}}}";
         }
     }
 }

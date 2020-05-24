@@ -13,9 +13,9 @@ namespace BranchMath.Algebra.Group {
         /// <exception cref="InvalidGroupException">If the order of the cyclic group is not positive</exception>
         public CyclicGroup(int order) {
             if (order <= 0) throw new InvalidGroupException("No cyclic group of negative order");
-            Elements = new ExplicitSet<AlgebraicElement<BigInteger>>();
+            Elements = new ExplicitSet<GroupElement<BigInteger>>();
             for (BigInteger i = 0; i < order / 2; ++i)
-                ((ExplicitSet<AlgebraicElement<BigInteger>>) Elements).Elements.Add(
+                ((ExplicitSet<GroupElement<BigInteger>>) Elements).Elements.Add(
                     new GroupElement<BigInteger>(i, this));
         }
 

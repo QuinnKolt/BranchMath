@@ -1,4 +1,5 @@
-﻿using BranchMath.Value;
+﻿using System;
+using ValueType = BranchMath.Value.ValueType;
 
 namespace BranchMath.Tree {
     /// <summary>
@@ -18,12 +19,46 @@ namespace BranchMath.Tree {
             this.value = value;
         }
 
+        public Node<V> DeepCopy() {
+            return new ConstantNode<V>(value);
+        }
+        
         public V evaluate() {
             return value;
         }
 
         public string ToLaTeX() {
             return value.ToLaTeX();
+        }
+        
+        public bool Matches(Node<ValueType> node) {
+            
+            if (node is ConstantNode<V> constantNode) {
+                return constantNode.value.Equals(value);
+            }
+
+            return false;
+        }
+        
+        public string structure(int indents) {
+            var str = "";
+            if (indents > 0) {
+                for (var i = 0; i < indents - 1; ++i)
+                    str += "|   ";
+
+                str += "|-  ";
+            }
+
+            return str + value.ToLaTeX();
+        }
+
+
+        public bool DeepEquals(Node<ValueType> node) {
+            if (node is ConstantNode<V> constantNode) {
+                return value.Equals(constantNode.value);
+            }
+
+            return false;
         }
     }
 }

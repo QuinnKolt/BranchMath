@@ -5,6 +5,12 @@ namespace BranchMath.Algebra.Ring {
     public abstract class Ring<I> : AlgebraicStructure<I> {
         public abstract string DisplayElement(AlgebraicElement<I> g);
         public abstract string ToLaTeX();
+        
+        public readonly Group<I> additive_group;
+
+        public Ring() {
+            additive_group = getAdditiveGroup();
+        }
 
         public virtual string ClassLaTeX() {
             return "\\mathrm{Ring}";
@@ -52,9 +58,44 @@ namespace BranchMath.Algebra.Ring {
         /// </summary>
         /// <returns>The multiplicative absorbing element of the ring</returns>
         public abstract RingElement<I> getZero();
+        
+        public virtual bool compare(AlgebraicElement<I> g, AlgebraicElement<I> h) {
+            return g.evaluate().Equals(h.evaluate());
+        }
 
-        public Group<I> getAdditiveGroup() {
-            throw new NotImplementedException();
+        /// <summary>
+        /// Gets the additive group corresponding to this ring
+        /// </summary>
+        /// <returns>The abelian group under addition corresponding to this ring</returns>
+        private AdditiveGroup getAdditiveGroup() => new AdditiveGroup(this);
+
+        private class AdditiveGroup : Group<I> {
+            Ring<I> ring;
+            internal AdditiveGroup(Ring<I> ring) {
+                this.ring = ring;
+            }
+            
+            public override string DisplayElement(AlgebraicElement<I> g) {
+                return ring.DisplayElement(g);
+            }
+
+            public override string ToLaTeX() {
+                return ring.ToLaTeX();
+            }
+
+            public override GroupElement<I> MultiplyElements(GroupElement<I> g, GroupElement<I> h) {
+                var r = ring.AddElements(new RingElement<I>(g.Identifier, ring), new RingElement<I>(h.Identifier, ring));
+                return new GroupElement<I>(r.Identifier, this);
+            }
+
+            public override GroupElement<I> GetInverse(GroupElement<I> g) {
+                var r = ring.GetAdditiveInverse(new RingElement<I>(g.Identifier, ring));
+                return new GroupElement<I>(r.Identifier, this);
+            }
+
+            public override GroupElement<I> GetIdentity() {
+                return new GroupElement<I>(ring.getZero().Identifier, this);
+            }
         }
     }
 }

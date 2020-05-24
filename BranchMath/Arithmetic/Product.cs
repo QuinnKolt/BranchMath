@@ -1,17 +1,14 @@
 ﻿using System;
-using System.Threading.Tasks;
+using System.Linq;
 using BranchMath.Value;
 using ValueType = BranchMath.Value.ValueType;
 
 namespace BranchMath.Arithmetic {
-    /// <summary>
-    ///     Represents the sum of many numbers
-    /// </summary>
-    public class Sum<N> : Mapping<N, N> where N : Summable<N>, ValueType {
-        public Sum() : base(-1) { }
+    public class Product<N> : Mapping<N, N> where N : Multipliable<N>, ValueType {
+        public Product() : base(-1) { }
 
         public override string ToLaTeX() {
-            return "+";
+            return "\\times";
         }
 
         public override string ClassLaTeX() {
@@ -21,7 +18,7 @@ namespace BranchMath.Arithmetic {
         public override N evaluate(N[] input) {
             var tot = input[0];
             for (var i = 1; i < input.Length; ++i) {
-                tot = tot.sum(input[i]);
+                tot = tot.times(input[i]);
             }
 
             return tot;
@@ -31,14 +28,7 @@ namespace BranchMath.Arithmetic {
         ///     The numbers being added
         /// </summary>
         public override string ToLaTeX(N[] summands) {
-            var latex = "";
-            for (var i = 0; i < summands.Length; ++i) {
-                latex += summands[i].ClassLaTeX();
-                if (i != summands.Length - 1)
-                    latex += " + ";
-            }
-
-            return latex;
+            return summands.Aggregate("", (current, t) => current + t.ClassLaTeX());
         }
     }
 }

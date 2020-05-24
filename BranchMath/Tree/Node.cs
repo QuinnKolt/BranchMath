@@ -17,9 +17,7 @@ namespace BranchMath.Tree {
         ///     affecting the original
         /// </summary>
         /// <returns>A copy of the subtree whose root is this node</returns>
-        public Node<V> DeepCopy() {
-            return this;
-        }
+        public Node<V> DeepCopy();
 
         /// <summary>
         ///     Get the value of the node in terms of its ValueType. Note: this throws an exception if the node is a
@@ -27,5 +25,15 @@ namespace BranchMath.Tree {
         /// </summary>
         /// <returns>The value of the node.</returns>
         public V evaluate();
+        
+        public bool Matches(Node<ValueType> node);
+
+        public string structure(int indents);
+
+        public string structure() {
+            return structure(0);
+        }
+
+        public bool DeepEquals(Node<ValueType> node);
     }
 }

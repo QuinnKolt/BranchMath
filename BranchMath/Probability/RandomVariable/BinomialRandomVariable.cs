@@ -20,7 +20,7 @@ namespace BranchMath.Probability.RandomVariable {
         /// <summary>
         ///     Create a new binomial random variable
         /// </summary>
-        /// <param name="k">Number of trials</param>
+        /// <param name="n">Number of trials</param>
         /// <param name="p">Probability of success</param>
         public BinomialRandomVariable(int n, double p) {
             this.n = n;

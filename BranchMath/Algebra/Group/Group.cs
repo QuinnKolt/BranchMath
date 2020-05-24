@@ -31,5 +31,9 @@
         /// </summary>
         /// <returns>The multiplicative unit of the group</returns>
         public abstract GroupElement<I> GetIdentity();
+        
+        public virtual bool compare(AlgebraicElement<I> g, AlgebraicElement<I> h) {
+            return g.evaluate().Equals(h.evaluate());
+        }
     }
 }

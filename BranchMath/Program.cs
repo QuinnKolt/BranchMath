@@ -1,24 +1,39 @@
 ﻿using System;
-using System.Numerics;
-using BranchMath.Algebra.Ring;
+using BranchMath.Arithmetic;
+using BranchMath.Arithmetic.Number;
+using BranchMath.Arithmetic.Trigonometry;
+using BranchMath.Tree;
 
 namespace BranchMath {
     internal static class Program {
         private static void Main(string[] args) {
-            var theintegers = new Integers();
-            var polys = new PolynomialRing<BigInteger, Integers.IntElement>(theintegers);
+            var sin = Sine.SIN;
+            var cos = Cosine.COS;
+            var pow = new Power<RealNumber, Integer>();
+            var plus = new Sum<RealNumber>();
+            var x = new VariableNode<RealNumber>("x");
             
-            var xp1 = new PolynomialRing<BigInteger, Integers.IntElement>.Polynomial(
-                new []{ (Integers.IntElement)theintegers.getOne(), 
-                    (Integers.IntElement) theintegers.getOne()}, polys);
-            var x = new PolynomialRing<BigInteger, Integers.IntElement>.Polynomial(
-                new []{ (Integers.IntElement)theintegers.getZero(), 
-                    (Integers.IntElement) theintegers.getOne()}, polys);
+            var sinnode = new MappingNode<RealNumber, RealNumber>(sin, new Node<RealNumber>[]{x});
+            var cosnode = new MappingNode<RealNumber, RealNumber>(cos, new Node<RealNumber>[]{x});
+            var sin2 = new BiFunctionNode<RealNumber, Integer, RealNumber>(pow, sinnode, new ConstantNode<Integer>(2));
+            var cos2 = new BiFunctionNode<RealNumber, Integer, RealNumber>(pow, cosnode, new ConstantNode<Integer>(2));
+            
+            var sum = new MappingNode<RealNumber, RealNumber>(plus,new Node<RealNumber>[]{sin2, cos2});
 
-            Console.WriteLine((xp1 + x).ToLaTeX());
-            Console.WriteLine((xp1 * x).ToLaTeX());
-            Console.WriteLine(((PolynomialRing<BigInteger, Integers.IntElement>.Polynomial) (xp1 ^ 6) 
-                               + new Integers.IntElement(3, theintegers)).ToLaTeX());
+            var pyth = new SimplificationRule<RealNumber>(sum, new ConstantNode<RealNumber>(1));
+            var four = new ConstantNode<RealNumber>(4);
+            
+            sinnode = new MappingNode<RealNumber, RealNumber>(sin, new Node<RealNumber>[]{new ConstantNode<RealNumber>(1)});
+            cosnode = new MappingNode<RealNumber, RealNumber>(cos, new Node<RealNumber>[]{new ConstantNode<RealNumber>(1)});
+            
+            sin2 = new BiFunctionNode<RealNumber, Integer, RealNumber>(pow, sinnode, new ConstantNode<Integer>(2));
+            cos2 = new BiFunctionNode<RealNumber, Integer, RealNumber>(pow, cosnode, new ConstantNode<Integer>(2));
+            
+            sum = new MappingNode<RealNumber, RealNumber>(plus, 
+                new Node<RealNumber>[]{sin2, cos2});
+            
+            Console.WriteLine(pyth.IsApplicable(sum));
+            Console.WriteLine(pyth.TryApply(sum).structure());
         }
     }
 }

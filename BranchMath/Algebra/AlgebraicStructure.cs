@@ -12,5 +12,9 @@ namespace BranchMath.Algebra {
         /// <param name="g">The element to display</param>
         /// <returns>The LaTeX representation of g</returns>
         public string DisplayElement(AlgebraicElement<I> g);
+
+        public bool compare(AlgebraicElement<I> g, AlgebraicElement<I> h) {
+            return g.evaluate().Equals(h.evaluate());
+        }
     }
 }

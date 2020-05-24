@@ -22,7 +22,7 @@ namespace BranchMath.Algebra {
         /// </summary>
         public I Identifier { get; }
 
-        public AlgebraicStructure<I> structure { protected get; set; }
+        protected readonly AlgebraicStructure<I> structure;
 
         public virtual object evaluate() {
             return Identifier;
@@ -44,7 +44,7 @@ namespace BranchMath.Algebra {
         /// <returns>True if the two elements can be simplified into one another</returns>
         public override bool Equals(object obj) {
             if (obj != null && obj is AlgebraicElement<I> element)
-                return element.Identifier.Equals(Identifier);
+                return structure.compare(element, this);
 
             return false;
         }

@@ -95,5 +95,17 @@ namespace BranchMath.Arithmetic.Number {
         public override string ClassLaTeX() {
             return "\\mathbb{Z}";
         }
+
+        public override bool Equals(object obj) {
+            if (obj is Integer i) {
+                return val == i.val;
+            }
+
+            return false;
+        }
+
+        public override int GetHashCode() {
+            return val.GetHashCode();
+        }
     }
 }
