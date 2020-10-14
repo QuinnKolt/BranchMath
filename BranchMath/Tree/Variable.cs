@@ -1,7 +1,7 @@
-﻿using BranchMath.Value;
+﻿using BranchMath.Math.Value;
 
 namespace BranchMath.Tree {
-    internal interface Variable<out V> : ValueNode<V> where V : ValueType {
+    public interface Variable<out V> : ValueNode<V> where V : ValueType {
         
     }
 }

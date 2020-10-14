@@ -17,10 +17,10 @@ namespace BranchMath.Display {
             for (var j = 0; j < ylabels.Length; ++j) max[j] = ylabels[j].ToString().Length;
 
             max[ylabels.Length] = 1;
-            foreach (var x in xlabels) max[ylabels.Length] = Math.Max(max[ylabels.Length], x.ToString().Length);
+            foreach (var x in xlabels) max[ylabels.Length] = System.Math.Max(max[ylabels.Length], x.ToString().Length);
 
             for (var i = 0; i < xlabels.Length; ++i) {
-                for (var j = 0; j < ylabels.Length; ++j) max[i] = Math.Max(max[i], entries[i, j].ToString().Length);
+                for (var j = 0; j < ylabels.Length; ++j) max[i] = System.Math.Max(max[i], entries[i, j].ToString().Length);
             }
 
             var str = center("", max[ylabels.Length] + 2) + " ||";

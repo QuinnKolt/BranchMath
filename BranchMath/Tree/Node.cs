@@ -1,4 +1,4 @@
-﻿using BranchMath.Value;
+﻿using BranchMath.Math.Value;
 
 namespace BranchMath.Tree {
     /// <summary>
@@ -9,7 +9,7 @@ namespace BranchMath.Tree {
         /// <summary>
         ///     Write the operation tree starting with this node as a root in LaTeX
         /// </summary>
-        /// <returns>tree in LaTeX</returns>
+        /// <returns>Tree in LaTeX</returns>
         public string ToLaTeX();
 
         /// <summary>
@@ -24,7 +24,7 @@ namespace BranchMath.Tree {
         ///     variable.
         /// </summary>
         /// <returns>The value of the node.</returns>
-        public V evaluate();
+        public V GetValue();
         
         public bool Matches(Node<ValueType> node);
 

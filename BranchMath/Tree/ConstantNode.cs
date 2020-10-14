@@ -1,5 +1,5 @@
 ﻿using System;
-using ValueType = BranchMath.Value.ValueType;
+using ValueType = BranchMath.Math.Value.ValueType;
 
 namespace BranchMath.Tree {
     /// <summary>
@@ -23,7 +23,7 @@ namespace BranchMath.Tree {
             return new ConstantNode<V>(value);
         }
         
-        public V evaluate() {
+        public V GetValue() {
             return value;
         }
 

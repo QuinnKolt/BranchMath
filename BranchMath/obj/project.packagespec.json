@@ -25,6 +25,24 @@
   },
   "frameworks": {
     "netcoreapp3.1": {
+      "dependencies": {
+        "SkiaSharp": {
+          "target": "Package",
+          "version": "[2.80.0-preview.14, )"
+        },
+        "SkiaSharp.Views.Forms": {
+          "target": "Package",
+          "version": "[2.80.0-preview.14, )"
+        },
+        "System.Drawing.Common": {
+          "target": "Package",
+          "version": "[5.0.0-preview.5.20278.1, )"
+        },
+        "Xamarin.Forms": {
+          "target": "Package",
+          "version": "[4.7.0.968, )"
+        }
+      },
       "imports": [
         "net461",
         "net462",

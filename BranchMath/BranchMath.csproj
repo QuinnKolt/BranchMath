@@ -10,4 +10,11 @@
       <Compile Remove="Algebra\Groups\CartesianProductGroup.cs" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="SkiaSharp" Version="2.80.0-preview.14" />
+      <PackageReference Include="SkiaSharp.Views.Forms" Version="2.80.0-preview.14" />
+      <PackageReference Include="System.Drawing.Common" Version="5.0.0-preview.5.20278.1" />
+      <PackageReference Include="Xamarin.Forms" Version="4.7.0.968" />
+    </ItemGroup>
+
 </Project>

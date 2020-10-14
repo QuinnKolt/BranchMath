@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using BranchMath.Value;
-using ValueType = BranchMath.Value.ValueType;
+using BranchMath.Math.Value;
+using ValueType = BranchMath.Math.Value.ValueType;
 
 namespace BranchMath.Tree {
     /// <summary>
@@ -49,8 +49,12 @@ namespace BranchMath.Tree {
             return new BiFunctionNode<D1, D2, C>(map, n1, n2, rules);
         }
 
-        public C evaluate() {
-            return map.evaluate(node1.evaluate(), node2.evaluate());
+        public Operator<C> getOperator() {
+            return map;
+        }
+
+        public C GetValue() {
+            return map.evaluate(node1.GetValue(), node2.GetValue());
         }
 
         public Node<C> DeepCopy() {

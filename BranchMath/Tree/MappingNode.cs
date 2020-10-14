@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using BranchMath.Value;
-using ValueType = BranchMath.Value.ValueType;
+using BranchMath.Math.Value;
+using ValueType = BranchMath.Math.Value.ValueType;
 
 namespace BranchMath.Tree {
     /// <summary>
@@ -17,14 +17,14 @@ namespace BranchMath.Tree {
         private List<SimplificationRule<C>> rules = new List<SimplificationRule<C>>();
 
         public MappingNode(Mapping<D, C> map, Node<D>[] nodes, List<SimplificationRule<C>> rules) {
-            if (nodes.Length != map.arity && map.arity != -1) throw new InvalidCastException();
+            if (nodes.Length != map.Arity() && map.Arity() != -1) throw new InvalidCastException();
             this.nodes = nodes;
             this.map = map;
             this.rules = rules;
         }
 
         public MappingNode(Mapping<D, C> map, Node<D>[] nodes) {
-            if (nodes.Length != map.arity && map.arity != -1) throw new InvalidCastException();
+            if (nodes.Length != map.Arity() && map.Arity() != -1) throw new InvalidCastException();
             this.map = map;
             this.nodes = nodes;
         }
@@ -53,10 +53,14 @@ namespace BranchMath.Tree {
             return new MappingNode<D, C>(map, node, rules);
         }
 
-        public C evaluate() {
+        public Operator<C> getOperator() {
+            return map;
+        }
+
+        public C GetValue() {
             var inp = new D[nodes.Length];
             for (var i = 0; i < nodes.Length; ++i)
-                inp[i] = nodes[i].evaluate();
+                inp[i] = nodes[i].GetValue();
             return map.evaluate(inp);
         }
 

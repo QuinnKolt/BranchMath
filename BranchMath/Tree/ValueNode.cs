@@ -1,4 +1,4 @@
-﻿using BranchMath.Value;
+﻿using BranchMath.Math.Value;
 
 namespace BranchMath.Tree {
     /// <summary>

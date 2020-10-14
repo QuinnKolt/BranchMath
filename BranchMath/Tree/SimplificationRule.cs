@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using ValueType = BranchMath.Value.ValueType;
+using ValueType = BranchMath.Math.Value.ValueType;
 
 namespace BranchMath.Tree {
     /// <summary>
@@ -11,7 +11,10 @@ namespace BranchMath.Tree {
     public class SimplificationRule<C> where C : ValueType {
         private readonly OperationNode<C> before;
         private readonly Node<C> after;
+        private readonly Dictionary<Variable<ValueType>, Func<ValueType, bool>> check_validity = new Dictionary<Variable<ValueType>, Func<ValueType, bool>>();
 
+        protected SimplificationRule() {}
+        
         public SimplificationRule(OperationNode<C> before, Node<C> after) {
             this.before = before;
             this.after = after;
@@ -51,7 +54,7 @@ namespace BranchMath.Tree {
         /// </summary>
         /// <param name="orig">The node being checked</param>
         /// <returns>Whether or not the rule is applicable</returns>
-        public bool IsApplicable(OperationNode<C> orig) {
+        public virtual bool IsApplicable(OperationNode<C> orig) {
             return CanApply((Node<ValueType>) orig, (Node<ValueType>) before, 
                 new Dictionary<Variable<ValueType>, Node<ValueType>>());
         }
@@ -77,7 +80,7 @@ namespace BranchMath.Tree {
         /// </summary>
         /// <param name="orig">The original node</param>
         /// <returns>The simplified node</returns>
-        public Node<C> TryApply(OperationNode<C> orig) {
+        public virtual Node<C> TryApply(OperationNode<C> orig) {
             var assignments = new Dictionary<Variable<ValueType>, Node<ValueType>>();
             if (!CanApply((Node<ValueType>) orig, (Node<ValueType>) before, assignments)) 
                 return orig;

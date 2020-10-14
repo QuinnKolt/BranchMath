@@ -1,5 +1,5 @@
 ﻿using System;
-using ValueType = BranchMath.Value.ValueType;
+using ValueType = BranchMath.Math.Value.ValueType;
 
 namespace BranchMath.Tree {
     /// <summary>
@@ -24,7 +24,7 @@ namespace BranchMath.Tree {
             return this;
         }
 
-        public V evaluate() {
+        public V GetValue() {
             throw new NullReferenceException();
         }
 
