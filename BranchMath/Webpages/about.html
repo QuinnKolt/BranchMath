@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="description" content="BranchMath is an online tool for manipulating operation TREES, learning from interactive tutorials of BRANCHES of math, and examining example problems by numerical methods.">
+        <title>BranchMath - About Us </title>
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+        <script id="MathJax-script" async
+                src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+        </script>
+        <link rel="stylesheet" href="test.css">
+        <link rel="stylesheet" href="menu.css">
+    </head>
+    <body>
+        <ul class="menu">
+            <li class="menu"><a href="index.html">Home</a></li>
+            <li class="menu"><a href="tree.html">Operation Tree</a></li>
+            <li class="menu dropdown">
+                <a href="courses.html" class="menu dropbtn">Courses</a>
+                <div class="menu dropdown-content">
+                    <a href="testing.html">Test</a>
+                </div>
+            </li>
+            <li class="menu"><a href="about.html">About</a></li>
+            <li class="menu design"><img src="icon.png" alt="BranchMath"></li>
+        </ul>
+        <p>BranchMath is a very early in development framework for mathematical assistance. The system is designed represent statements, equations, and more as trees, and from this allow easy manipulations. This utility is used throughout this website in several ways. We have a problem solving algorithm that attempts to directly apply common simplification rules to solve given problems, we have an editor for creating custom mathematical objects, we have courses which utilize the BranchMath algorithms for interactive explanation, examples, and challenges. </p>
+        <p>BranchMath will have the power to convert a variety of forms of expressions into operation trees. Currently in development are</p>
+        <ul>
+            <li>A plaintext interpreter</li>
+            <li>A LaTeX interpreter</li>
+            <li>An interactive editor</li>
+        </ul>
+        <p>Because mathematics is a very large beast, we intend to have a database which stores the symbols for each of these interpreters which will ask/suggest the correct interpretation of the symbols used. The symbol $\mathscr{L}^2$ or \(\mathscr{L}^2\) may be interpreted as Lebesgue square space or the second Laplace transform, for example. However, one of these is clearly less likely the intended usage. This database will decrease the operation time in the tree as it will only load relevant objects rather than ALL mathematical objects.</p>
+        <p>If you create a BranchMath account, you can store your own custom mathematical objects, symbols, and more. This operation tree has the power to create highly sophisticated mathematical objects, representations for your objects, simplification rules, and more. This allows customizability to how to your BranchMath trees work. An account also keeps track of your progress through the courses you work on and gives suggestions for related topics and problems that are should be accessible based on your sample problem scores and recent browsing history on BranchMath.
+        </p>
+        <p>To view our current BranchMath database, <a href="database.html">click here</a>. When you create your objects, you have the option to submit your object for review. If you do this, our BranchMath moderators will review your submission and may add it to the database for all users to access. We look for submissions that are general enough to have applications but specific enough to be used easily. For example, it would not be useful to have a submission like \(f(x)=2x^2 + 5x + 6\) because this is too specific to be generally useful. It would also not be useful to have an object like \(f:\mathrm{Grp}\to\mathbb{Q}\) because this is too general to be very easily used. You can submit your objects anonomously or attach your name for the world to see. With your submissions, you can also attach (or submit separately) simplification rules for the moderators to review (and ensure are true). We welcome all nontrivial identities (e.g. \(\sin^2(x) + \cos^2(x) = 1\)). In the submission of your identities, BranchMath will verify that this identity isn't immediately obvious from or a special case of another identity and may also test a few sample values for variables to save moderators some time. These rules can vary anywhere from common identities lower math courses to identities recently proven in research papers.
+        </p>
+    </body>
+</html>
